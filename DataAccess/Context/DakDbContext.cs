@@ -15,6 +15,13 @@ namespace DataAccess.Model
 
         }
       
-        public DbSet<PackageStatus> packageStatus { get; set; }
+        public DbSet<Client> Client { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<Coordinate> Coordinate { get; set; }
+        public DbSet<DeliveryArea> DeliveryArea { get; set; }
+        public DbSet<Expedition> Expedition { get; set; }
+        public DbSet<FinalClient> FinalClient { get; set; }
+        public DbSet<Package> Package { get; set; }
+        public DbSet<PackageStatus> PackageStatus { get; set; }
     }
 }
