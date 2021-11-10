@@ -1,6 +1,6 @@
 ﻿using CommonSolution.DTOs;
 using DataAccess.Mapper;
-using DataAccess.Model;
+using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Logic;
 using CommonSolution.DTOs;
-using DataAccess.Model;
+using DataAccess.Context;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,10 +16,12 @@ namespace WebApplication.Controllers
     public class PackageStatusController : ControllerBase
     {
         public readonly DakDbContext _context;
+        public readonly LocalLogContext _LogContext;
 
-        public PackageStatusController(DakDbContext context)
+        public PackageStatusController(DakDbContext context, LocalLogContext logContext)
         {
             this._context = context;
+            this._LogContext = logContext;
         }
         // GET: api/<ValuesController>
         [HttpGet]

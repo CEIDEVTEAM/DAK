@@ -1,4 +1,4 @@
-using DataAccess.Model;
+using DataAccess.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +31,7 @@ namespace WebApplication
 
             services.AddControllers();
             services.AddDbContext<DakDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+            services.AddDbContext<LocalLogContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexionLog")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication", Version = "v1" });
