@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Logic;
 using CommonSolution.DTOs;
 using DataAccess.Context;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,14 @@ namespace WebApplication.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        public PackageStatusDTO Get()
+        public ActionResult Get()
         {
-            int id = 1;
-            LPackageController LController = new LPackageController(_context);
-            return LController.GetStatusByCode(id);
+            //int id = 1;
+            //LPackageController LController = new LPackageController(_context);
+            //return LController.GetStatusByCode(id);
+            
+            return Ok(this._LogContext.TradingParameters.ToList());
+           
         }
 
         // GET api/<ValuesController>/5
