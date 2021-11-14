@@ -26,8 +26,8 @@ namespace DataAccess.Models
         [StringLength(50)]
         public string EMail { get; set; }
 
-        public virtual Company Company { get; set; }
+        //public virtual Company Company { get; set; }
 
-        public virtual FinalClient FinalClient { get; set; }
+        //public virtual FinalClient FinalClient { get; set; }
     }
 }

@@ -27,6 +27,11 @@ namespace DataAccess.Context
         {
             modelBuilder.Entity<Coordinate>()
                 .HasKey(c => new { c.Latitude, c.Longitude });
+
+            modelBuilder.Entity<Expedition>()
+            .HasOne(a => a.DeliveryArea)
+            .WithOne(a => a.Expedition)
+            .HasForeignKey<DeliveryArea>(c => c.Id);
         }
        
     }

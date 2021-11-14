@@ -1,6 +1,5 @@
 ﻿using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
-using DataAccess.Interfaces;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -10,26 +9,19 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mappers
 {
-    public class FinalClientMapper : IClientMapper
+    public class FinalClientMapper
     {
-        public Client MapToEntity(IDto _IDto)
+        public FinalClient MapToEntity(IDto _IDto)
         {
             if (_IDto == null)
                 return null;
 
             FinalClientDto dto = (FinalClientDto)_IDto;
-            return new Client
+            return new FinalClient
             {
-                BillingType = dto.BillingType,
-                PhoneNumber = dto.PhoneNumber,
-                Address = dto.Address,
-                EMail = dto.EMail,
-                FinalClient = new FinalClient
-                {
-                    DocumentNumber = dto.DocumentNumber,
-                    Name = dto.Name,
-                    LastName = dto.LastName
-                },
+                DocumentNumber = dto.DocumentNumber,
+                Name = dto.Name,
+                LastName = dto.LastName
             };
         }
 
@@ -44,13 +36,13 @@ namespace DataAccess.Mappers
                 BillingType = entity.BillingType,
                 PhoneNumber = entity.PhoneNumber,
                 Address = entity.Address,
-                EMail = entity.EMail,
-                DocumentNumber = entity.FinalClient.DocumentNumber,
-                Name = entity.FinalClient.Name,
-                LastName = entity.FinalClient.LastName
+                EMail = entity.EMail
+                //DocumentNumber = entity.FinalClient.DocumentNumber,
+                //Name = entity.FinalClient.Name,
+                //LastName = entity.FinalClient.LastName
             };
         }
-       
+
     }
 }
 

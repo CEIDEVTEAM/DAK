@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Interfaces;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
+using DataAccess.Interfaces;
 using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Logic
 {
-    public class LClientController : IController
+    public class LFinalClientController : IController
     {
         private Repository _Repository;
 
-
-        public LClientController(DakDbContext context)
+        public LFinalClientController(DakDbContext context)
         {
 
             this._Repository = new Repository(context);
@@ -26,7 +26,7 @@ namespace BusinessLogic.Logic
             List<string> errors = new List<string>();
 
             if (errors.Count == 0)
-                this._Repository._ClientRepository.AddClient(dto);
+                this._Repository._FinalClientRepository.Add(dto);
 
             return errors;
         }

@@ -10,25 +10,18 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mappers
 {
-    public class CompanyMapper : IClientMapper
+    public class CompanyMapper
     {
-        public Client MapToEntity(IDto _IDto)
+        public Company MapToEntity(IDto _IDto)
         {
             if (_IDto == null)
                 return null;
 
             CompanyDto dto = (CompanyDto)_IDto;
-            return new Client
+            return new Company
             {
-                BillingType = dto.BillingType,
-                PhoneNumber = dto.PhoneNumber,
-                Address = dto.Address,
-                EMail = dto.EMail,
-                Company = new Company
-                {
-                    Rut = dto.Rut,
-                    BusinessName = dto.BusinessName
-                },
+                Rut = dto.Rut,
+                BusinessName = dto.BusinessName
             };
         }
 
@@ -44,8 +37,8 @@ namespace DataAccess.Mappers
                 PhoneNumber = entity.PhoneNumber,
                 Address = entity.Address,
                 EMail = entity.EMail,
-                Rut = entity.Company.Rut,
-                BusinessName = entity.Company.BusinessName
+                //Rut = entity.Company.Rut,
+                //BusinessName = entity.Company.BusinessName
             };
         }
     }

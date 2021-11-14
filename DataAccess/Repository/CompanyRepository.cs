@@ -1,43 +1,40 @@
-﻿using CommonSolution.DTOs;
-using CommonSolution.Interfaces;
+﻿using CommonSolution.Interfaces;
 using DataAccess.Context;
-using DataAccess.Interfaces;
 using DataAccess.Mappers;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class ClientRepository
+    public class CompanyRepository
     {
-        private FinalClientMapper _FinalClientMapper;
         private CompanyMapper _CompanyMapper;
-        private IClientMapper _IClientMapper;
+        private ClientMapper _ClientMapper;
         private readonly DakDbContext _Context;
-        public ClientRepository(DakDbContext context)
+        public CompanyRepository(DakDbContext context)
         {
-            this._FinalClientMapper = new FinalClientMapper();
             this._CompanyMapper = new CompanyMapper();
+            this._ClientMapper = new ClientMapper();
             this._Context = context;
         }
 
-
-        public void AddClient(IDto dto)
+        public void Add(IDto dto)
         {
             using (var trann = _Context.Database.BeginTransaction())
             {
                 try
                 {
-                    //
-                    //HAY QUE VER COMO SOLUCIONAR ACA PARA QUE SEA DINAMICO
-                    //
-                    Client clientEntity = this._FinalClientMapper.MapToEntity(dto);
+                    Client clientEntity = this._ClientMapper.MapToEntity(dto);
                     _Context.Client.Add(clientEntity);
+                    _Context.SaveChanges();
+
+                    Company companyEntity = this._CompanyMapper.MapToEntity(dto);
+                    companyEntity.IdClient = clientEntity.Id;
+                    _Context.Company.Add(companyEntity);
 
                     _Context.SaveChanges();
                     trann.Commit();
@@ -47,9 +44,7 @@ namespace DataAccess.Repository
                 {
                     trann.Rollback();
                 }
-
             }
-
         }
     }
 }

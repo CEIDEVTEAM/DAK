@@ -23,7 +23,7 @@ namespace DataAccess.Repository
         public PackageStatusDto GetLogReclamoById(int statusCode)
         {
             PackageStatusDto dto = new PackageStatusDto();
-            return dto; //this._PackageStatusMapper.MapToDTO(_Context.PackageStatus.AsNoTracking().FirstOrDefault(f => f.StatusCode == statusCode));
+            return this._PackageStatusMapper.MapToDto(_Context.PackageStatus.AsNoTracking().FirstOrDefault(f => f.StatusCode == statusCode));
         }
     }
 }

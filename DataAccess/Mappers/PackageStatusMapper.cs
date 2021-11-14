@@ -22,7 +22,7 @@ namespace DataAccess.Mapper
             };
         }
 
-        public PackageStatusDto MapToDTO(PackageStatus entity)
+        public PackageStatusDto MapToDto(PackageStatus entity)
         {
             if (entity == null)
                 return null;
