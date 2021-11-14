@@ -20,10 +20,10 @@ namespace DataAccess.Repository
             this._Context = context;
         }
 
-        public PackageStatusDTO GetLogReclamoById(int statusCode)
+        public PackageStatusDto GetLogReclamoById(int statusCode)
         {
-            PackageStatusDTO dto = new PackageStatusDTO();
-            return this._PackageStatusMapper.MapToDTO(_Context.PackageStatus.AsNoTracking().FirstOrDefault(f => f.StatusCode == statusCode));
+            PackageStatusDto dto = new PackageStatusDto();
+            return dto; //this._PackageStatusMapper.MapToDTO(_Context.PackageStatus.AsNoTracking().FirstOrDefault(f => f.StatusCode == statusCode));
         }
     }
 }

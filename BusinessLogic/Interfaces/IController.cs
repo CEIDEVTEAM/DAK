@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommonSolution.DTOs
+namespace BusinessLogic.Interfaces
 {
-    public class PackageStatusDto : IDto
+    public interface IController
     {
-        public int StatusCode { get; set; }
-        public string Status { get; set; }
+        List<string> Add(IDto dto);
+
+        
     }
 }

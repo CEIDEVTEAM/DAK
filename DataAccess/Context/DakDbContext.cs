@@ -23,5 +23,11 @@ namespace DataAccess.Context
         public DbSet<FinalClient> FinalClient { get; set; }
         public DbSet<Package> Package { get; set; }
         public DbSet<PackageStatus> PackageStatus { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Coordinate>()
+                .HasKey(c => new { c.Latitude, c.Longitude });
+        }
+       
     }
 }

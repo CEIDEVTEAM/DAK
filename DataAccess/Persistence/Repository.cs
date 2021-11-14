@@ -12,10 +12,12 @@ namespace DataAccess.Persistence
     {
         private readonly DakDbContext _Context;
         public PackageRepository _PackageRepository { get; set; }
+        public ClientRepository _ClientRepository { get; set; }
         public Repository(DakDbContext context)
         {
             this._Context = context;
             this._PackageRepository = new PackageRepository(_Context);
+            this._ClientRepository = new ClientRepository(_Context);
         }
 
         

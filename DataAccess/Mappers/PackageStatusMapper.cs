@@ -10,7 +10,7 @@ namespace DataAccess.Mapper
 {
     public class PackageStatusMapper
     {
-        public PackageStatus MapToEntity(PackageStatusDTO dto)
+        public PackageStatus MapToEntity(PackageStatusDto dto)
         {
             if (dto == null)
                 return null;
@@ -22,12 +22,12 @@ namespace DataAccess.Mapper
             };
         }
 
-        public PackageStatusDTO MapToDTO(PackageStatus entity)
+        public PackageStatusDto MapToDTO(PackageStatus entity)
         {
             if (entity == null)
                 return null;
 
-            return new PackageStatusDTO
+            return new PackageStatusDto
             {
                 Status = entity.Status,
                 StatusCode = entity.StatusCode

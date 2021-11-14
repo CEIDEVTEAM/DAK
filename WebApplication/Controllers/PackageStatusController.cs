@@ -25,7 +25,7 @@ namespace WebApplication.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        public PackageStatusDTO Get()
+        public PackageStatusDto Get()
         {
             int id = 1;
             LPackageController LController = new LPackageController(_context);
@@ -34,7 +34,7 @@ namespace WebApplication.Controllers
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}", Name = "GetStatus")]
-        public PackageStatusDTO Get(int id)
+        public PackageStatusDto Get(int id)
         {
             
             LPackageController LController = new LPackageController(_context);

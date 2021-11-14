@@ -20,7 +20,7 @@ namespace BusinessLogic.Logic
             this._Repository = new Repository(context);
         }
 
-        public PackageStatusDTO GetStatusByCode(int statusCode)
+        public PackageStatusDto GetStatusByCode(int statusCode)
         {
 
             return this._Repository._PackageRepository.GetLogReclamoById(statusCode);
