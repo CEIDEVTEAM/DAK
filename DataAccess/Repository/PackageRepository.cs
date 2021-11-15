@@ -13,8 +13,8 @@ namespace DataAccess.Repository
     public class PackageRepository
     {
         private PackageStatusMapper _PackageStatusMapper;
-        private readonly DakDbContext _Context;
-        public PackageRepository(DakDbContext context)
+        private readonly DAKContext _Context;
+        public PackageRepository(DAKContext context)
         {
             this._PackageStatusMapper = new PackageStatusMapper();
             this._Context = context;

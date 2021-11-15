@@ -14,7 +14,7 @@ namespace BusinessLogic.Logic
         private Repository _Repository;
        
 
-        public LPackageController(DakDbContext context)
+        public LPackageController(DAKContext context)
         {
             
             this._Repository = new Repository(context);

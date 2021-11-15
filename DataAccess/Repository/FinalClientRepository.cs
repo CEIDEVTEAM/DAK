@@ -17,8 +17,8 @@ namespace DataAccess.Repository
     {
         private FinalClientMapper _FinalClientMapper;
         private ClientMapper _ClientMapper;
-        private readonly DakDbContext _Context;
-        public FinalClientRepository(DakDbContext context)
+        private readonly DAKContext _Context;
+        public FinalClientRepository(DAKContext context)
         {
             this._FinalClientMapper = new FinalClientMapper();
             this._ClientMapper = new ClientMapper();
@@ -48,6 +48,16 @@ namespace DataAccess.Repository
                     trann.Rollback();
                 }
             }
+        }
+
+
+        public IDto GetClienteById(int id)
+        {
+            IDto newdto = new FinalClientDto();
+            Client client = this._Context.Client.Include("FinalClient").FirstOrDefault(x=>x.FinalClient.IdClient==id);
+            FinalClient fClient = this._Context.FinalClient.Include("Client").Single(x => x.IdClient == id);
+            return newdto = this._FinalClientMapper.MapToDto(client);
+
         }
     }
 }

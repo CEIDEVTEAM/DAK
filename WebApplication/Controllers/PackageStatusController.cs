@@ -15,19 +15,19 @@ namespace WebApplication.Controllers
     [ApiController]
     public class PackageStatusController : ControllerBase
     {
-        public readonly DakDbContext _context;
-        public readonly LocalLogContext _LogContext;
+        public readonly DAKContext _context;
+        //public readonly LocalLogContext _LogContext;
 
-        public PackageStatusController(DakDbContext context, LocalLogContext logContext)
+        public PackageStatusController(DAKContext context)
         {
             this._context = context;
-            this._LogContext = logContext;
+            //this._LogContext = logContext;
         }
         // GET: api/<ValuesController>
         [HttpGet]
         public PackageStatusDto Get()
         {
-            int id = 1;
+            int id = 2;
             LPackageController LController = new LPackageController(_context);
             return LController.GetStatusByCode(id);
         }

@@ -36,7 +36,7 @@ namespace DataAccess.Mappers
                 BillingType = entity.BillingType,
                 PhoneNumber = entity.PhoneNumber,
                 Address = entity.Address,
-                EMail = entity.EMail,
+                EMail = entity.Email,
                 //Rut = entity.Company.Rut,
                 //BusinessName = entity.Company.BusinessName
             };

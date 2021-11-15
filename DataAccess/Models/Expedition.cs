@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace DataAccess.Models
 {
-    public class Expedition
+    public partial class Expedition
     {
+        public Expedition()
+        {
+            Packages = new HashSet<Package>();
+        }
+
         public int Id { get; set; }
-
-        [Required]
-        [StringLength(20)]
         public string Truck { get; set; }
-
-        [Column(TypeName = "date")]
         public DateTime Date { get; set; }
-
         public int IdDeliveryArea { get; set; }
 
-        public virtual DeliveryArea DeliveryArea { get; set; }
-
-        public virtual ICollection<Package> Package { get; set; }
+        public virtual DeliveryArea IdNavigation { get; set; }
+        public virtual ICollection<Package> Packages { get; set; }
     }
 }

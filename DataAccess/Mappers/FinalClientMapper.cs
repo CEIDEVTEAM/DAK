@@ -36,10 +36,11 @@ namespace DataAccess.Mappers
                 BillingType = entity.BillingType,
                 PhoneNumber = entity.PhoneNumber,
                 Address = entity.Address,
-                EMail = entity.EMail
-                //DocumentNumber = entity.FinalClient.DocumentNumber,
-                //Name = entity.FinalClient.Name,
-                //LastName = entity.FinalClient.LastName
+                EMail = entity.Email,
+                IdClient = entity.FinalClient.IdClient,
+                DocumentNumber = entity.FinalClient.DocumentNumber,
+                Name = entity.FinalClient.Name,
+                LastName = entity.FinalClient.LastName
             };
         }
 

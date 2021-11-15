@@ -16,13 +16,13 @@ namespace WebApplication.Controllers
     [ApiController]
     public class FinalClientController : Controller
     {
-        public readonly DakDbContext _context;
-        public readonly LocalLogContext _LogContext;
+        public readonly DAKContext _context;
+        //public readonly LocalLogContext _LogContext;
 
-        public FinalClientController(DakDbContext context, LocalLogContext logContext)
+        public FinalClientController(DAKContext context)
         {
             this._context = context;
-            this._LogContext = logContext;
+            //this._LogContext = logContext;
         }
 
 
@@ -32,6 +32,14 @@ namespace WebApplication.Controllers
         {
             IController lgc = new LFinalClientController(_context);
             return lgc.Add(dto);
+        }
+
+        [HttpGet("{id}", Name = "GetFinalClient")]
+        public IDto Get(int id)
+        {
+
+            LFinalClientController LController = new LFinalClientController(_context);
+            return LController.GetClientById(id);
         }
     }
 }

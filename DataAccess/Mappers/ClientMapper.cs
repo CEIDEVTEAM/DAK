@@ -22,7 +22,7 @@ namespace DataAccess.Mappers
                 BillingType = dto.BillingType,
                 PhoneNumber = dto.PhoneNumber,
                 Address = dto.Address,
-                EMail = dto.EMail,
+                Email = dto.EMail,
             };
         }
 

@@ -14,13 +14,13 @@ namespace WebApplication.Controllers
     [ApiController]
     public class CompanyController : Controller
     {
-        public readonly DakDbContext _context;
-        public readonly LocalLogContext _LogContext;
+        public readonly DAKContext _context;
+        //public readonly LocalLogContext _LogContext;
 
-        public CompanyController(DakDbContext context, LocalLogContext logContext)
+        public CompanyController(DAKContext context)
         {
             this._context = context;
-            this._LogContext = logContext;
+            //this._LogContext = logContext;
         }
 
 

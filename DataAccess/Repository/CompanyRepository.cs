@@ -14,8 +14,8 @@ namespace DataAccess.Repository
     {
         private CompanyMapper _CompanyMapper;
         private ClientMapper _ClientMapper;
-        private readonly DakDbContext _Context;
-        public CompanyRepository(DakDbContext context)
+        private readonly DAKContext _Context;
+        public CompanyRepository(DAKContext context)
         {
             this._CompanyMapper = new CompanyMapper();
             this._ClientMapper = new ClientMapper();

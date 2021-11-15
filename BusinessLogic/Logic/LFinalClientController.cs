@@ -15,7 +15,7 @@ namespace BusinessLogic.Logic
     {
         private Repository _Repository;
 
-        public LFinalClientController(DakDbContext context)
+        public LFinalClientController(DAKContext context)
         {
 
             this._Repository = new Repository(context);
@@ -41,6 +41,11 @@ namespace BusinessLogic.Logic
             List<string> errors = new List<string>();
 
             return errors;
+        }
+
+        public IDto GetClientById(int id)
+        {
+            return this._Repository._FinalClientRepository.GetClienteById(id);
         }
     }
 }
