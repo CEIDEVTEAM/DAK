@@ -15,6 +15,7 @@ namespace WebApplication.Controllers
     [Route("api/FinalClient")]
     [ApiController]
     public class FinalClientController : Controller
+
     {
         public readonly DAKContext _context;
         //public readonly LocalLogContext _LogContext;
@@ -30,7 +31,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public List<string> Post([FromBody] FinalClientDto dto)
         {
-            IController lgc = new LFinalClientController(_context);
+            IController lgc = new LFinalClientController();
             return lgc.Add(dto);
         }
 
@@ -38,8 +39,8 @@ namespace WebApplication.Controllers
         public IDto Get(int id)
         {
 
-            LFinalClientController LController = new LFinalClientController(_context);
-            return LController.GetClientById(id);
+            LFinalClientController LController = new LFinalClientController();
+            return LController.GetById(id);
         }
     }
 }

@@ -10,7 +10,6 @@ namespace BusinessLogic.Interfaces
     public interface IController
     {
         List<string> Add(IDto dto);
-
-        
+        IDto GetById(int v);
     }
 }

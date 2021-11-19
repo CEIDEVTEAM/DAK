@@ -17,7 +17,7 @@ namespace BusinessLogic.Logic
         public LPackageController(DAKContext context)
         {
             
-            this._Repository = new Repository(context);
+            this._Repository = new Repository();
         }
 
         public PackageStatusDto GetStatusByCode(int statusCode)

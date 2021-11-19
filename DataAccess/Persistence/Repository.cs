@@ -10,16 +10,16 @@ namespace DataAccess.Persistence
 {
     public class Repository
     {
-        private readonly DAKContext _Context;
+      
         public PackageRepository _PackageRepository { get; set; }
         public FinalClientRepository _FinalClientRepository { get; set; }
         public CompanyRepository _CompanyRepository { get; set; }
-        public Repository(DAKContext context)
+        public Repository()
         {
-            this._Context = context;
-            this._PackageRepository = new PackageRepository(_Context);
-            this._FinalClientRepository = new FinalClientRepository(_Context);
-            this._CompanyRepository = new CompanyRepository(_Context);
+            DAKContext context = new DAKContext();
+            this._PackageRepository = new PackageRepository(context);
+            this._FinalClientRepository = new FinalClientRepository(context);
+            this._CompanyRepository = new CompanyRepository(context);
         }
 
         

@@ -17,7 +17,7 @@ namespace BusinessLogic.Logic
         public LCompanyController(DAKContext context)
         {
 
-            this._Repository = new Repository(context);
+            this._Repository = new Repository();
         }
 
         public List<string> Add(IDto dto)
@@ -30,6 +30,11 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
+        public void GetById(int v)
+        {
+            throw new NotImplementedException();
+        }
+
         //
         //VER SI VAMOS A VALIDAR MSIMO EN EL CONTROLLER O EN OTRA CLASE
         //QUE VALIDACIONES VAMOS A TENER ?? SOLO DE TIPOS DE DATO?
@@ -40,6 +45,11 @@ namespace BusinessLogic.Logic
             List<string> errors = new List<string>();
 
             return errors;
+        }
+
+        IDto IController.GetById(int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
