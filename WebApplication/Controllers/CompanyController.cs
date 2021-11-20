@@ -14,13 +14,10 @@ namespace WebApplication.Controllers
     [ApiController]
     public class CompanyController : Controller
     {
-        public readonly DakDbContext _context;
-        public readonly LocalLogContext _LogContext;
+        
 
-        public CompanyController(DakDbContext context, LocalLogContext logContext)
+        public CompanyController()
         {
-            this._context = context;
-            this._LogContext = logContext;
         }
 
 
@@ -28,7 +25,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public List<string> Post([FromBody] CompanyDto dto)
         {
-            IController lgc = new LCompanyController(_context);
+            IController lgc = new LCompanyController();
             return lgc.Add(dto);
         }
     }

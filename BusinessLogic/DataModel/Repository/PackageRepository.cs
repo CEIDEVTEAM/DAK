@@ -1,5 +1,4 @@
 ﻿using CommonSolution.DTOs;
-using DataAccess.Mapper;
 using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic.DataModel.Mappers;
 
-namespace DataAccess.Repository
+namespace BusinessLogic.DataModel.Repository
 {
     public class PackageRepository
     {

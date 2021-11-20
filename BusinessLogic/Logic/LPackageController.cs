@@ -1,6 +1,6 @@
 ﻿using CommonSolution.DTOs;
 using DataAccess.Context;
-using DataAccess.Persistence;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace BusinessLogic.Logic
 {
     public class LPackageController
     {
-        private Repository _Repository;
+        
        
 
        

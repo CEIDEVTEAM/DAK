@@ -3,7 +3,7 @@ using BusinessLogic.Logic;
 using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
-using DataAccess.Mappers;
+
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,13 +16,10 @@ namespace WebApplication.Controllers
     [ApiController]
     public class FinalClientController : Controller
     {
-        public readonly DakDbContext _context;
-        public readonly LocalLogContext _LogContext;
-
-        public FinalClientController(DakDbContext context, LocalLogContext logContext)
+       
+        public FinalClientController()
         {
-            this._context = context;
-            this._LogContext = logContext;
+           
         }
 
 
@@ -30,7 +27,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public List<string> Post([FromBody] FinalClientDto dto)
         {
-            IController lgc = new LFinalClientController(_context);
+            IController lgc = new LFinalClientController();
             return lgc.Add(dto);
         }
     }

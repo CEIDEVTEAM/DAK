@@ -1,6 +1,7 @@
-﻿using CommonSolution.Interfaces;
+﻿using BusinessLogic.DataModel.Mappers;
+using CommonSolution.Interfaces;
 using DataAccess.Context;
-using DataAccess.Mappers;
+
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repository
+namespace BusinessLogic.DataModel.Repository
 {
     public class CompanyRepository
     {
         private CompanyMapper _CompanyMapper;
         private ClientMapper _ClientMapper;
-        private readonly DakDbContext _Context;
-        public CompanyRepository(DakDbContext context)
+        private readonly DAKContext _Context;
+        public CompanyRepository(DAKContext context)
         {
             this._CompanyMapper = new CompanyMapper();
             this._ClientMapper = new ClientMapper();

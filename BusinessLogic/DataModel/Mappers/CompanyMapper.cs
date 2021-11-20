@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Mappers
+namespace BusinessLogic.DataModel.Mappers
 {
     public class CompanyMapper
     {
@@ -36,9 +36,9 @@ namespace DataAccess.Mappers
                 BillingType = entity.BillingType,
                 PhoneNumber = entity.PhoneNumber,
                 Address = entity.Address,
-                EMail = entity.EMail,
-                //Rut = entity.Company.Rut,
-                //BusinessName = entity.Company.BusinessName
+                EMail = entity.Email,
+                Rut = entity.Company.Rut,
+                BusinessName = entity.Company.BusinessName
             };
         }
     }

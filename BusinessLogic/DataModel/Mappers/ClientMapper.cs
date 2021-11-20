@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Mappers
+namespace BusinessLogic.DataModel.Mappers
 {
     public class ClientMapper
     {
@@ -22,7 +22,7 @@ namespace DataAccess.Mappers
                 BillingType = dto.BillingType,
                 PhoneNumber = dto.PhoneNumber,
                 Address = dto.Address,
-                EMail = dto.EMail,
+                Email = dto.EMail,
             };
         }
 

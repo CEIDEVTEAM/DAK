@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Mappers
+namespace BusinessLogic.DataModel.Mappers
 {
     public class FinalClientMapper
     {
@@ -36,10 +36,10 @@ namespace DataAccess.Mappers
                 BillingType = entity.BillingType,
                 PhoneNumber = entity.PhoneNumber,
                 Address = entity.Address,
-                EMail = entity.EMail
-                //DocumentNumber = entity.FinalClient.DocumentNumber,
-                //Name = entity.FinalClient.Name,
-                //LastName = entity.FinalClient.LastName
+                EMail = entity.Email,
+                DocumentNumber = entity.FinalClient.DocumentNumber,
+                Name = entity.FinalClient.Name,
+                LastName = entity.FinalClient.LastName
             };
         }
 
