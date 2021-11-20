@@ -15,10 +15,10 @@ namespace DataAccess.Context
 
         }
 
-        public virtual DbSet<Log> Log { get; set; }
-        public virtual DbSet<PaymentParameters> PaymentParameters { get; set; }
-        public virtual DbSet<TradingParameters> TradingParameters { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        //public virtual DbSet<Log> Log { get; set; }
+        //public virtual DbSet<PaymentParameters> PaymentParameters { get; set; }
+        //public virtual DbSet<TradingParameters> TradingParameters { get; set; }
+        //public virtual DbSet<User> User { get; set; }
 
     }
 }

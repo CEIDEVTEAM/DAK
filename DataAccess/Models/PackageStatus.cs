@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace DataAccess.Models
 {
-    public class PackageStatus
+    public partial class PackageStatus
     {
-        [Key]
+        public PackageStatus()
+        {
+            Packages = new HashSet<Package>();
+        }
+
         public int StatusCode { get; set; }
         public string Status { get; set; }
 
+        public virtual ICollection<Package> Packages { get; set; }
     }
 }

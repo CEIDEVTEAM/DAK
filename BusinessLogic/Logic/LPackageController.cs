@@ -14,18 +14,14 @@ namespace BusinessLogic.Logic
         private Repository _Repository;
        
 
-        public LPackageController(DakDbContext context)
-        {
-            
-            this._Repository = new Repository(context);
-        }
+       
 
-        public PackageStatusDto GetStatusByCode(int statusCode)
-        {
+        //public PackageStatusDTO GetStatusByCode(int statusCode)
+        //{
 
-            return this._Repository._PackageRepository.GetLogReclamoById(statusCode);
+        //    //return this._Repository._PackageRepository.GetLogReclamoById(statusCode);
             
-        }
+        //}
 
     }
 }

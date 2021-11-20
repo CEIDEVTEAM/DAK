@@ -30,7 +30,7 @@ namespace WebApplication
         {
 
             services.AddControllers();
-            services.AddDbContext<DakDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+            //services.AddDbContext<DakDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
             services.AddDbContext<LocalLogContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexionLog")));
             services.AddSwaggerGen(c =>
             {
