@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DataModel.Repository;
 using DataAccess.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.DataModel
 {
-    class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         protected readonly DAKContext _context;
         protected DbContextTransaction _transaction;
@@ -21,6 +22,9 @@ namespace BusinessLogic.DataModel
         public UnitOfWork()
         {
             this._context = new DAKContext();
+            
+
+
             this.CompanyRepository = new CompanyRepository(this._context);
             this.FinalClientRepository = new FinalClientRepository(this._context);
             this.PackageRepository = new PackageRepository(this._context);

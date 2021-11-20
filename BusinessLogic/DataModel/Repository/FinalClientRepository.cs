@@ -12,6 +12,7 @@ namespace BusinessLogic.DataModel.Repository
         private FinalClientMapper _FinalClientMapper;
         private ClientMapper _ClientMapper;
         private readonly DAKContext _Context;
+
         public FinalClientRepository(DAKContext context)
         {
             this._FinalClientMapper = new FinalClientMapper();
