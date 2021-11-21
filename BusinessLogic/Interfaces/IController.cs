@@ -12,5 +12,6 @@ namespace BusinessLogic.Interfaces
     {
         List<string> Add(IDto dto);
         IDto GetById(int id);
+        
     }
 }

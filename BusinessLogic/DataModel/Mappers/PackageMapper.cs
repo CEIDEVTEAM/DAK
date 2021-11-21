@@ -33,5 +33,36 @@ namespace BusinessLogic.DataModel.Mappers
             };
         }
 
+        public PackageDto MapToDto(Package package)
+        {
+            if (package == null)
+                return null;
+ 
+            return new PackageDto()
+            {
+                Paid = package.Paid,
+                Date = package.Date,
+                IdExpedition = package.IdExpedition,
+                StatusCode = package.StatusCode,
+                TrackingNumber = package.TrackingNumber,
+                IdClient = package.IdClient,
+                IdRecipient = package.IdRecipient,
+                Address = package.Address,
+                Latitude = package.Latitude,
+                Longitude = package.Longitude,
+                Distance = package.Distance
+            };
+        }
+
+        public List<PackageDto> MapToDto(List<Package> packages)
+        {
+            List<PackageDto> dtos = new List<PackageDto>();
+            foreach (Package package in packages)
+            {
+                PackageDto dto = this.MapToDto(package);
+                dtos.Add(dto);
+            }
+            return dtos;
+        }
     }
 }

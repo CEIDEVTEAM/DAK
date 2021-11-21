@@ -33,6 +33,16 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
+        public List<PackageDto> GetAll()
+        {
+            List<PackageDto> dto;
+            using (var uow = new UnitOfWork())
+            {
+                dto = uow.PackageRepository.GetAll();
+            }
+            return dto;
+        }
+
         public IDto GetById(int id)
         {
             throw new NotImplementedException();

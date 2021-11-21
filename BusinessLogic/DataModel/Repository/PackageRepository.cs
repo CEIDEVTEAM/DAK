@@ -32,5 +32,9 @@ namespace BusinessLogic.DataModel.Repository
 
         }
 
+        public List<PackageDto> GetAll()
+        {
+            return this._PackageMapper.MapToDto(this._Context.Package.AsNoTracking().ToList());
+        }
     }
 }
