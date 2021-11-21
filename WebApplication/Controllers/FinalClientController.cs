@@ -31,12 +31,21 @@ namespace WebApplication.Controllers
             return lgc.Add(dto);
         }
 
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
+        //[HttpGet]
+        //public List<FinalClientDto> Post(int id)
+        //{
+        //    IController lgc = new LFinalClientController();
+        //    List<FinalClientDto> lst = new List<FinalClientDto>();
+        //    lst.Add((FinalClientDto)lgc.GetById(id));
+        //    return lst;
+        //}
+
         [HttpGet]
-        public FinalClientDto Post(int id)
+        public List<FinalClientDto> GetAll()
         {
-            IController lgc = new LFinalClientController();
-            return (FinalClientDto)lgc.GetById(id);
+            LFinalClientController lgc = new LFinalClientController();
+            return lgc.GetAll();
         }
     }
 }

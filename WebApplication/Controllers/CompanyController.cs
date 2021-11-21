@@ -25,7 +25,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public List<string> Post([FromBody] CompanyDto dto)
         {
-            IController lgc = new LCompanyController();
+            LCompanyController lgc = new LCompanyController();
             return lgc.Add(dto);
         }
     }

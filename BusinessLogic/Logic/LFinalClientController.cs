@@ -20,6 +20,14 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
+        public List<FinalClientDto> GetAll()
+        {
+            using (var uow = new UnitOfWork())
+            {
+                return uow.FinalClientRepository.GetAll();
+            };
+        }
+
         public IDto GetById(int id)
         {
             IDto dto = new FinalClientDto();
