@@ -8,8 +8,22 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import {useState} from 'react';
+
 
 export default function AddressForm() {
+
+  const [isCart, setIsCart] = useState();
+
+  const handleChange = (event) => {
+    if(event.target.value == 'Carta'){
+      setIsCart(true);
+    }
+    else{
+      setIsCart(false);
+    }
+
+  };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -52,19 +66,26 @@ export default function AddressForm() {
         <Grid item xs={12}>
           <FormControl component="fieldset">
             <FormLabel component="legend">Tipo de envío</FormLabel>
-            <RadioGroup row aria-label="Tipo de envío" name="row-radio-buttons-group" required>
+            <RadioGroup row aria-label="Tipo de envío" name="row-radio-buttons-group" onChange={handleChange}>
               <FormControlLabel value="Paquete" control={<Radio />} label="Paquete" />
-              <FormControlLabel value="Carta" control={<Radio />} label="Carta" />
+              <FormControlLabel value="Carta" control={<Radio />} label="Carta"/>
             </RadioGroup>
           </FormControl>
         </Grid>
         </Grid>
         <Grid item xs={12}>
-          {/* <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          /> */}
-        
+               {!isCart && (
+                 <Grid item xs={12}>
+                    <TextField
+                    label="Peso"
+                    id="outlined-start-adornment"
+                    sx={{ m: 1, width: '25ch' }}
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start">kg</InputAdornment>,
+                    }}
+                  />
+                  </Grid>
+                  )} 
       </Grid>
     </React.Fragment>
   );

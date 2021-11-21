@@ -1,4 +1,8 @@
 import React from "react";
+import {Wrapper, Status} from "@googlemaps/react-wrapper";
+import {GoogleMaps, withScriptjs, withGoogleMaps} from "react-googl-maps";
+
+import reactDom from "react-dom";
 
 const Maps = () => {
   const mapRef = React.useRef(null);
@@ -99,4 +103,7 @@ const Maps = () => {
   );
 };
 
+<Wrapper apiKey={"AIzaSyCewHvBMDcMrBFlu3aqp1OhShkwSjWLiBQ"} render={Maps}></Wrapper>
+
 export default Maps;
+
