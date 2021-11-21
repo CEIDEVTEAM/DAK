@@ -30,5 +30,13 @@ namespace WebApplication.Controllers
             IController lgc = new LFinalClientController();
             return lgc.Add(dto);
         }
+
+        [HttpGet("{id}")]
+        [HttpGet]
+        public FinalClientDto Post(int id)
+        {
+            IController lgc = new LFinalClientController();
+            return (FinalClientDto)lgc.GetById(id);
+        }
     }
 }

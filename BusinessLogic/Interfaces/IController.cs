@@ -1,4 +1,5 @@
-﻿using CommonSolution.Interfaces;
+﻿using CommonSolution.DTOs;
+using CommonSolution.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,6 @@ namespace BusinessLogic.Interfaces
     public interface IController
     {
         List<string> Add(IDto dto);
-
-        
+        IDto GetById(int id);
     }
 }

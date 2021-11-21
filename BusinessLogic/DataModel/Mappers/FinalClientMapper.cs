@@ -37,9 +37,9 @@ namespace BusinessLogic.DataModel.Mappers
                 PhoneNumber = entity.PhoneNumber,
                 Address = entity.Address,
                 EMail = entity.Email,
-                DocumentNumber = entity.FinalClient.DocumentNumber,
-                Name = entity.FinalClient.Name,
-                LastName = entity.FinalClient.LastName
+                DocumentNumber = entity.FinalClient?.DocumentNumber,
+                Name = entity.FinalClient?.Name,
+                LastName = entity.FinalClient?.LastName
             };
         }
 

@@ -7,10 +7,10 @@ namespace DataAccess.Models
 {
     public partial class Expedition
     {
-        public Expedition()
-        {
-            Packages = new HashSet<Package>();
-        }
+        //public Expedition()
+        //{
+        //    Packages = new HashSet<Package>();
+        //}
 
         public int Id { get; set; }
         public string Truck { get; set; }
@@ -18,6 +18,6 @@ namespace DataAccess.Models
         public int IdDeliveryArea { get; set; }
 
         public virtual DeliveryArea IdNavigation { get; set; }
-        public virtual ICollection<Package> Packages { get; set; }
+        //public virtual ICollection<Package> Packages { get; set; }
     }
 }

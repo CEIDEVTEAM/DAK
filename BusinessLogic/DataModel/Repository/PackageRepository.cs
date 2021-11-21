@@ -7,23 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic.DataModel.Mappers;
+using CommonSolution.Interfaces;
+using DataAccess.Models;
 
 namespace BusinessLogic.DataModel.Repository
 {
     public class PackageRepository
     {
         private PackageStatusMapper _PackageStatusMapper;
+        private PackageMapper _PackageMapper;
         private readonly DAKContext _Context;
         public PackageRepository(DAKContext context)
         {
             this._PackageStatusMapper = new PackageStatusMapper();
+            this._PackageMapper = new PackageMapper();
             this._Context = context;
         }
 
-        public PackageStatusDto GetLogReclamoById(int statusCode)
+        public void Add(IDto dto)
         {
-            PackageStatusDto dto = new PackageStatusDto();
-            return this._PackageStatusMapper.MapToDto(_Context.PackageStatus.AsNoTracking().FirstOrDefault(f => f.StatusCode == statusCode));
+            Package packageEntity = this._PackageMapper.MapToEntity(dto);
+            _Context.Package.Add(packageEntity);
+            _Context.SaveChanges();
+
         }
+
     }
 }

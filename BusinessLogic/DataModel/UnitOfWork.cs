@@ -23,8 +23,6 @@ namespace BusinessLogic.DataModel
         {
             this._context = new DAKContext();
             
-
-
             this.CompanyRepository = new CompanyRepository(this._context);
             this.FinalClientRepository = new FinalClientRepository(this._context);
             this.PackageRepository = new PackageRepository(this._context);
@@ -42,7 +40,7 @@ namespace BusinessLogic.DataModel
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+           this._context.Dispose();
         }
 
         public void Rollback()

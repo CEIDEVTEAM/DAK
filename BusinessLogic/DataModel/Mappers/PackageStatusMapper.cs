@@ -1,4 +1,5 @@
 ﻿using CommonSolution.DTOs;
+using CommonSolution.Interfaces;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,13 @@ namespace BusinessLogic.DataModel.Mappers
 {
     public class PackageStatusMapper
     {
-        public PackageStatus MapToEntity(PackageStatusDto dto)
+        public PackageStatus MapToEntity(IDto _IDto)
         {
-            if (dto == null)
+            if (_IDto == null)
                 return null;
 
-            return new PackageStatus
+            PackageStatusDto dto = (PackageStatusDto)_IDto;
+            return new PackageStatus()
             {
                 Status = dto.Status,
                 StatusCode = dto.StatusCode

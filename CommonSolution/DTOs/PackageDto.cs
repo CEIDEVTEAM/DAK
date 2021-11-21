@@ -1,11 +1,13 @@
-﻿using System;
+﻿using CommonSolution.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-#nullable disable
-
-namespace DataAccess.Models
+namespace CommonSolution.DTOs
 {
-    public partial class Package
+    public class PackageDto : IDto
     {
         public int Id { get; set; }
         public bool Paid { get; set; }
@@ -20,8 +22,5 @@ namespace DataAccess.Models
         public string Longitude { get; set; }
         public int Distance { get; set; }
 
-        public virtual Client IdClientNavigation { get; set; }
-        public virtual Client IdRecipientNavigation { get; set; }
-        public virtual PackageStatus StatusCodeNavigation { get; set; }
     }
 }

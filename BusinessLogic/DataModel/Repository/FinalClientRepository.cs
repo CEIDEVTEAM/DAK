@@ -3,7 +3,8 @@ using CommonSolution.Interfaces;
 using DataAccess.Context;
 using DataAccess.Models;
 using System;
-
+using System.Data.Entity;
+using System.Linq;
 
 namespace BusinessLogic.DataModel.Repository
 {
@@ -22,8 +23,6 @@ namespace BusinessLogic.DataModel.Repository
 
         public void Add(IDto dto)
         {
-
-
             Client clientEntity = this._ClientMapper.MapToEntity(dto);
             _Context.Client.Add(clientEntity);
             _Context.SaveChanges();
@@ -33,10 +32,14 @@ namespace BusinessLogic.DataModel.Repository
             _Context.FinalClient.Add(finalClientEntity);
 
             _Context.SaveChanges();
+        }
 
+        public IDto GetById(int id)
+        {
+            Client entity = this._Context.Client.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            entity.FinalClient = this._Context.FinalClient.AsNoTracking().FirstOrDefault(x => x.IdClient == id);
 
-
-
+            return this._FinalClientMapper.MapToDto(entity);
         }
     }
 }

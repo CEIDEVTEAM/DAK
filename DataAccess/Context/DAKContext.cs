@@ -10,11 +10,12 @@ namespace DataAccess.Context
     public partial class DAKContext : DbContext
     {
 
-        public DAKContext() { 
+        public DAKContext() : base(new DbContextOptions<DAKContext>())
+        { 
+            
         }
 
-        public DAKContext(DbContextOptions<DAKContext> options)
-            : base(options)
+        public DAKContext(DbContextOptions<DAKContext> options): base(options)
         {
         }
 
@@ -31,8 +32,7 @@ namespace DataAccess.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("data source = devteamhost.ddns.net; initial catalog = DAK; user id = CEIDEVTEAM; password = CeiDev158$48 / Team; MultipleActiveResultSets = true; Integrated Security=True");
+                optionsBuilder.UseSqlServer("data source = devteamhost.ddns.net; initial catalog = DAK; user id = CEIDEVTEAM; password = CeiDev158$48/Team; MultipleActiveResultSets = true; ");
             }
         }
 
@@ -127,8 +127,6 @@ namespace DataAccess.Context
             {
                 entity.ToTable("Expedition");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.Property(e => e.Truck)
@@ -177,8 +175,6 @@ namespace DataAccess.Context
             {
                 entity.ToTable("Package");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(100)
@@ -205,12 +201,6 @@ namespace DataAccess.Context
                     .HasForeignKey(d => d.IdClient)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Package_IdClient");
-
-                entity.HasOne(d => d.IdExpeditionNavigation)
-                    .WithMany(p => p.Packages)
-                    .HasForeignKey(d => d.IdExpedition)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Package_Expedition");
 
                 entity.HasOne(d => d.IdRecipientNavigation)
                     .WithMany(p => p.PackageIdRecipientNavigations)

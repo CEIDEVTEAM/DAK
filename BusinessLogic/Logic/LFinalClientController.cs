@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DataModel;
 using BusinessLogic.Interfaces;
+using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using System.Collections.Generic;
 
@@ -17,6 +18,17 @@ namespace BusinessLogic.Logic
                     uow.FinalClientRepository.Add(dto);
             }
             return errors;
+        }
+
+        public IDto GetById(int id)
+        {
+            IDto dto = new FinalClientDto();
+            using (var uow = new UnitOfWork())
+            {
+                dto = uow.FinalClientRepository.GetById(id);
+            };
+
+            return dto;
         }
 
         //
