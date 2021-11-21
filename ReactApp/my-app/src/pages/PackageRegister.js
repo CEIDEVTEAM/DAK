@@ -17,7 +17,7 @@ import PaymentForm from '../components/PaymentForm';
 import Review from '../components/Review';
 
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Entrega', 'Paquete', 'Zona'];
 
 function getStepContent(step) {
   switch (step) {
@@ -34,7 +34,7 @@ function getStepContent(step) {
 
 const theme = createTheme();
 
-export default function Checkout() {
+export default function PackageRegister() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -78,7 +78,7 @@ export default function Checkout() {
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
+                      Atras
                     </Button>
                   )}
 
@@ -87,7 +87,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Cobrar' : 'Sigiente'}
                   </Button>
                 </Box>
               </React.Fragment>

@@ -4,6 +4,10 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 export default function AddressForm() {
   return (
@@ -22,7 +26,6 @@ export default function AddressForm() {
             autoComplete="given-name"
             variant="standard"
           />
-        
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -37,6 +40,7 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            required
             id="direccion"
             name="direccion"
             label="Dirección"
@@ -45,54 +49,22 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="shipping address-level2"
-            variant="standard"
-          />
+        <Grid item xs={12}>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Tipo de envío</FormLabel>
+            <RadioGroup row aria-label="Tipo de envío" name="row-radio-buttons-group" required>
+              <FormControlLabel value="Paquete" control={<Radio />} label="Paquete" />
+              <FormControlLabel value="Carta" control={<Radio />} label="Carta" />
+            </RadioGroup>
+          </FormControl>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
-            fullWidth
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="shipping country"
-            variant="standard"
-          />
         </Grid>
         <Grid item xs={12}>
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Use this address for payment details"
-          />
-        </Grid>
+          /> */}
+        
       </Grid>
     </React.Fragment>
   );

@@ -24,7 +24,7 @@ export const SidebarData = [
   },
   {
     title: 'Registro de Paquete',
-    path: '/checkOut',
+    path: '/PackageRegister',
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },
