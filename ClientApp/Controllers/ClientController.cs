@@ -17,17 +17,7 @@ namespace ClientApp.Controllers
         // GET: ClientController
         public ActionResult NewFinalClient()
         {
-            IEnumerable<ClientTypeEnum> colClientTypeEnum = Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>();
-            List<SelectListItem> ClientTypeList = new List<SelectListItem>();
-            foreach (ClientTypeEnum item in colClientTypeEnum)
-            {
-                SelectListItem option = new SelectListItem();
-                option.Value = item.ToString();
-                option.Text = item.ToString();
-                ClientTypeList.Add(option);
-            }
-
-            ViewBag.colClientTypeSelect = ClientTypeList;
+            ViewBag.colClientTypeSelect = GetSelectClientType();
 
             return View();
         }
@@ -45,6 +35,28 @@ namespace ClientApp.Controllers
             //}
 
             return RedirectToAction("NewFinalClient");
+        }
+
+        public ActionResult NewCompany()
+        {
+            ViewBag.colClientTypeSelect = GetSelectClientType();
+
+            return View();
+        }
+
+        public ActionResult AddCompany(CompanyDto dto)
+        {
+            IController lgc = new LCompanyController();
+
+            List<string> colErrors = lgc.Add(dto);
+
+            //if (colErrors.Count == 0)
+            //{
+            //    Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
+            //    ModelState.Clear();
+            //}
+
+            return RedirectToAction("NewCompany  ");
         }
 
         // GET: ClientController/Create
@@ -109,5 +121,22 @@ namespace ClientApp.Controllers
                 return View();
             }
         }
+
+        #region AUX
+        public List<SelectListItem> GetSelectClientType()
+        {
+            IEnumerable<ClientTypeEnum> colClientTypeEnum = Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>();
+            List<SelectListItem> ClientTypeList = new List<SelectListItem>();
+            foreach (ClientTypeEnum item in colClientTypeEnum)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.ToString();
+                option.Text = item.ToString();
+                ClientTypeList.Add(option);
+            }
+
+            return ClientTypeList;
+        }
+        #endregion
     }
 }
