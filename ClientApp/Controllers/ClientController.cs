@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusinessLogic.Interfaces;
+using BusinessLogic.Logic;
+using CommonSolution.DTOs;
+using CommonSolution.ENUMs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +15,36 @@ namespace ClientApp.Controllers
     public class ClientController : Controller
     {
         // GET: ClientController
-        public ActionResult NewClient()
+        public ActionResult NewFinalClient()
         {
+            IEnumerable<ClientTypeEnum> colClientTypeEnum = Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>();
+            List<SelectListItem> ClientTypeList = new List<SelectListItem>();
+            foreach (ClientTypeEnum item in colClientTypeEnum)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.ToString();
+                option.Text = item.ToString();
+                ClientTypeList.Add(option);
+            }
+
+            ViewBag.colClientTypeSelect = ClientTypeList;
+
             return View();
         }
 
-        // GET: ClientController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult AddFinalClient(FinalClientDto dto)
         {
-            return View();
+            IController lgc = new LFinalClientController();
+
+            List<string> colErrors = lgc.Add(dto);
+
+            //if (colErrors.Count == 0)
+            //{
+            //    Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
+            //    ModelState.Clear();
+            //}
+
+            return RedirectToAction("NewFinalClient");
         }
 
         // GET: ClientController/Create

@@ -27,9 +27,9 @@ namespace CommonSolution.DTOs
         [DisplayName("Dirección")]
         public string Address { get; set; }
 
-        [StringLength(50, ErrorMessage = "El eMail no puede superar los 50 caracteres")]
-        [Required(ErrorMessage = "El eMail es requerida")]
-        [EmailAddress(ErrorMessage = "El eMail no es válido")]
+        [StringLength(50, ErrorMessage = "El Email no puede superar los 50 caracteres")]
+        [Required(ErrorMessage = "El Email es requerida")]
+        [EmailAddress(ErrorMessage = "El Email no es válido")]
         [DisplayName("Email")]
         public string EMail { get; set; }
     }
