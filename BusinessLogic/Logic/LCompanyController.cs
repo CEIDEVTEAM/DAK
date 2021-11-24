@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.DataModel;
+using BusinessLogic.Interfaces;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
 using System;
@@ -13,7 +14,13 @@ namespace BusinessLogic.Logic
     {
         public List<string> Add(IDto dto)
         {
-            throw new NotImplementedException();
+            List<string> errors = new List<string>();
+            using (var uow = new UnitOfWork())
+            {
+                if (errors.Count == 0)
+                    uow.CompanyRepository.Add(dto);
+            }
+            return errors;
         }
 
         public IDto GetById(int id)

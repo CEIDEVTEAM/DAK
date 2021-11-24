@@ -3,7 +3,6 @@ using BusinessLogic.Logic;
 using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
-
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

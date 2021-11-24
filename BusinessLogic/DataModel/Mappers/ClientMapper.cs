@@ -1,4 +1,5 @@
 ﻿using CommonSolution.DTOs;
+using CommonSolution.ENUMs;
 using CommonSolution.Interfaces;
 using DataAccess.Models;
 using System;
@@ -19,11 +20,34 @@ namespace BusinessLogic.DataModel.Mappers
             ClientDto dto = (ClientDto)_IDto;
             return new Client
             {
-                BillingType = dto.BillingType,
+                BillingType = this.SetBillignType(dto.BillingType),
                 PhoneNumber = dto.PhoneNumber,
                 Address = dto.Address,
                 Email = dto.EMail,
             };
+        }
+
+
+        public string SetBillignType(string billingTypeDto)
+        {
+            string resp = "";
+            Enum.TryParse(billingTypeDto, out ClientTypeEnum billingTypeEnum);
+
+            switch (billingTypeEnum)
+            {
+                case ClientTypeEnum.WEIGHT_AND_DISTANCE_PRICE:
+                    resp = "WD";
+                    break;
+                case ClientTypeEnum.FIXED_PRICE:
+                    resp = "FP";
+                    break;
+                case ClientTypeEnum.WEIGHT_PRICE:
+                    resp = "WE";
+                    break;
+                default:
+                    break;
+            }
+            return resp;
         }
 
     }
