@@ -31,11 +31,11 @@ namespace ClientApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAll()
+        public JsonResult GetAll()
         {
             LPackageController lgc = new LPackageController();
             List<PackageDto> dto = lgc.GetAll();
-            return View(dto);
+            return Json(new { data = dto });
         }
 
         // GET: PackageController/Edit/5
