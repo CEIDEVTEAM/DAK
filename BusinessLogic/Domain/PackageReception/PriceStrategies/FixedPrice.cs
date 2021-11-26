@@ -12,12 +12,14 @@ namespace BusinessLogic.Domain.PackageReception.PriceStrategies
     {
         public float CalculatePrice()
         {
+            float price = 0;
+            
             using (var uow = new UnitOfWork())
             {
-
-                    uow.PackageRepository.Add(dto);
                 
             }
+
+            return price;
         }
     }
 }

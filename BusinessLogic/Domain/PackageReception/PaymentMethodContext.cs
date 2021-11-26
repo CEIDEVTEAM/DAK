@@ -16,12 +16,12 @@ namespace BusinessLogic.Domain.PackageReception
             this.paymentMethod = _paymentMethod;
         }
 
-        public bool ProcessPayment()
+        public bool ProcessPayment(float amount)
         {
             bool processed = false;
 
             if (this.paymentMethod != null)
-                processed = this.paymentMethod.ProcessPayment();
+                processed = this.paymentMethod.ProcessPayment(amount);
 
             return processed;
         }

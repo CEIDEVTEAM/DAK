@@ -9,7 +9,7 @@ namespace BusinessLogic.Domain.PackageReception.PaymentMethodStrategies
 {
     public class Cash : IPaymentMethod
     {
-        public bool ProcessPayment()
+        public bool ProcessPayment(float amount)
         {
             throw new NotImplementedException();
         }
