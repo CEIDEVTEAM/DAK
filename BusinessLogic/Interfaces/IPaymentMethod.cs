@@ -8,6 +8,6 @@ namespace BusinessLogic.Interfaces
 {
     public interface IPaymentMethod
     {
-        bool ProcessPayment();
+        bool ProcessPayment(float amount);
     }
 }

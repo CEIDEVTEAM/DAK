@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DataModel;
+using BusinessLogic.Domain.PackageReception;
 using BusinessLogic.Interfaces;
 using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
@@ -47,6 +48,17 @@ namespace BusinessLogic.Logic
         {
             throw new NotImplementedException();
         }
+
+        public bool ProcessPayment(IPaymentMethod paymentMethod, float amount)
+        {
+            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
+
+            bool response = context.ProcessPayment(amount);
+
+            return response;
+        }
+
+
 
         //
         //VER SI VAMOS A VALIDAR MSIMO EN EL CONTROLLER O EN OTRA CLASE
