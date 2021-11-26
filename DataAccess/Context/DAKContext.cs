@@ -27,6 +27,8 @@ namespace DataAccess.Context
         public virtual DbSet<FinalClient> FinalClient { get; set; }
         public virtual DbSet<Package> Package { get; set; }
         public virtual DbSet<PackageStatus> PackageStatus { get; set; }
+        public virtual DbSet<PackageTrackingDetail> PackageTrackingDetail { get; set; }
+        public virtual DbSet<PaymentRecord> PaymentRecord { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -226,6 +228,38 @@ namespace DataAccess.Context
                 entity.Property(e => e.Status)
                     .IsRequired()
                     .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<PackageTrackingDetail>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("PackageTrackingDetail");
+
+                entity.Property(e => e.DateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Ubication)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<PaymentRecord>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("PaymentRecord");
+
+                entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.PaymentMethod)
+                    .IsRequired()
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 

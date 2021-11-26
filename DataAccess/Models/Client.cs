@@ -21,7 +21,6 @@ namespace DataAccess.Models
 
         public virtual Company Company { get; set; }
         public virtual FinalClient FinalClient { get; set; }
-
         public virtual ICollection<Package> PackageIdClientNavigations { get; set; }
         public virtual ICollection<Package> PackageIdRecipientNavigations { get; set; }
     }

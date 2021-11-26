@@ -5,13 +5,12 @@ using System.Collections.Generic;
 
 namespace DataAccess.Models
 {
-    public partial class Expedition
+    public partial class PaymentRecord
     {
         public int Id { get; set; }
-        public string Truck { get; set; }
         public DateTime Date { get; set; }
-        public int IdDeliveryArea { get; set; }
-
-        public virtual DeliveryArea IdNavigation { get; set; }
+        public int PackageId { get; set; }
+        public string PaymentMethod { get; set; }
+        public double Amount { get; set; }
     }
 }

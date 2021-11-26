@@ -11,14 +11,12 @@ namespace BusinessLogic.DataModel
     public class UnitOfWorkLocal : IUnitOfWork, IDisposable
     {
 
-        protected readonly LocalLogContext _context;
+        protected readonly LocalLogDBContext _context;
         protected DbContextTransaction _transaction;
 
         public UnitOfWorkLocal()
         {
-            this._context = new LocalLogContext();
-
-
+            this._context = new LocalLogDBContext();
 
         }
 
