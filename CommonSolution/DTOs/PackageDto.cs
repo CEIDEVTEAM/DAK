@@ -1,6 +1,9 @@
 ﻿using CommonSolution.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +18,24 @@ namespace CommonSolution.DTOs
         public int? IdExpedition { get; set; }
         public int StatusCode { get; set; }
         public string TrackingNumber { get; set; }
-        public int IdClient { get; set; }
-        public int IdRecipient { get; set; }
+        [Remote(action: "ValidateRemitent", controller: "Package", ErrorMessage = "Remote validation is working")]
+        [Required(ErrorMessage = "Remitente Requerido")]
+        [DisplayName("Remitente")]
+        public string IdClient { get; set; }
+        [Remote("ValidateRecipient", "Package", ErrorMessage = "El Cliente no existe")]
+        [Required(ErrorMessage = "Destinatario Requerido")]
+        [DisplayName("Destinatario")]
+        public string IdRecipient { get; set; }
         public string Address { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public int Distance { get; set; }
+
+        public float Height { get; set; }
+        public float Width { get; set; }
+        public float Weight { get; set; }
+        public float Length { get; set; }
+        public string Type { get; set; }
 
     }
 }

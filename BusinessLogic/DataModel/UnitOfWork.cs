@@ -18,7 +18,7 @@ namespace BusinessLogic.DataModel
         public CompanyRepository CompanyRepository { get; set; }
         public FinalClientRepository FinalClientRepository { get; set; }
         public PackageRepository PackageRepository { get; set; }
-
+        public DeliveryAreaRepository DeliveryAreaRepository { get; set; }
         public UnitOfWork()
         {
             this._context = new DAKContext();
@@ -26,6 +26,7 @@ namespace BusinessLogic.DataModel
             this.CompanyRepository = new CompanyRepository(this._context);
             this.FinalClientRepository = new FinalClientRepository(this._context);
             this.PackageRepository = new PackageRepository(this._context);
+            this.DeliveryAreaRepository = new DeliveryAreaRepository(this._context);
 
         }
         public void BeginTransaction()

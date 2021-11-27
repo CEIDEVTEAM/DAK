@@ -48,6 +48,21 @@ namespace BusinessLogic.Logic
             throw new NotImplementedException();
         }
 
+        public bool ExistClientByNumber(int number)
+        {
+            bool existInCompany;
+            bool existInFClient;
+            using (var uow = new UnitOfWork())
+            {
+                existInCompany = uow.FinalClientRepository.AnyFinalClientByDocument(number.ToString());
+                existInFClient = uow.CompanyRepository.AnyCompanyByRut(number.ToString());
+            }
+
+            if (existInCompany || existInFClient)
+                return true;
+            return false;
+        }
+
         //
         //VER SI VAMOS A VALIDAR MSIMO EN EL CONTROLLER O EN OTRA CLASE
         //QUE VALIDACIONES VAMOS A TENER ?? SOLO DE TIPOS DE DATO?

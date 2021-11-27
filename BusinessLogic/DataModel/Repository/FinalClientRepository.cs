@@ -36,7 +36,7 @@ namespace BusinessLogic.DataModel.Repository
             _Context.SaveChanges();
         }
 
-        public  List<FinalClientDto> GetAll()
+        public List<FinalClientDto> GetAll()
         {
             return (from fc in this._Context.FinalClient.AsNoTracking()
                     join cli in this._Context.Client on fc.IdClient equals cli.Id
@@ -59,5 +59,12 @@ namespace BusinessLogic.DataModel.Repository
 
             return this._FinalClientMapper.MapToDto(entity);
         }
+
+        public bool AnyFinalClientByDocument(string docNumber)
+        {
+            return _Context.FinalClient.Any(x => x.DocumentNumber == docNumber);
+        }
+
+
     }
 }

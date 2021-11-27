@@ -3,86 +3,95 @@
 @{
     ViewData["Title"] = "New";
 }
+<link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Recepción de paquete</h1>
+                    <hr />
+                    <h4 class="m-0 text-dark">Nuevo Paquete</h4>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content" style="margin-left:25px">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="New">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h1>New</h1>
+                    <div class="form-group">
+                        <label asp-for="IdClient" class="control-label"></label>
+                        <input asp-for="IdClient" class="form-control" />
+                        <span asp-validation-for="IdClient" class="text-danger"></span>
 
-<h4>PackageDto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="New">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdRecipient" class="control-label">Destinatario</label>
+                        <input asp-for="IdRecipient" class="form-control" />
+                        <span asp-validation-for="IdRecipient" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.Type, (List<SelectListItem>)ViewBag.colTypeSelect, "-- Tipo de encomienda --", new { @class = "form-control", id = "selectValue", @onchange = "hideDivDimensions(this.value)" })
+                        <span asp-validation-for="Type" class="text-danger"></span>
+
+                    </div>
+                    <hr />
+                    <div id="dimensions" style="display:none">
+                        <h4 class="m-0 text-dark">Dimensiones y Peso</h4>
+                        <div class="row">
+                            <div class="col">
+                                <label asp-for="Width" class="control-label"></label>
+                                <input asp-for="Width" class="form-control" />
+                                <span asp-validation-for="Width" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <label asp-for="Height" class="control-label"></label>
+                                <input asp-for="Height" class="form-control" />
+                                <span asp-validation-for="Height" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label asp-for="Length" class="control-label"></label>
+                                <input asp-for="Length" class="form-control" />
+                                <span asp-validation-for="Length" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <label asp-for="Weight" class="control-label"></label>
+                                <input asp-for="Weight" class="form-control" />
+                                <span asp-validation-for="Weight" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <input type="submit" value="Procesar" class="btn btn-primary" id="smBut" />
+                        <input type="button" value="Destino" class="btn btn-secondary" id="btnDir" onclick="hideDivMap()" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Paid" /> @Html.DisplayNameFor(model => model.Paid)
-                </label>
+            <div class="col-md-4">
+                <hr />
+                <div id="map" class="form-group" style="width: 800px; height: 600px;display:none"></div>
+                <hr />
             </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdExpedition" class="control-label"></label>
-                <input asp-for="IdExpedition" class="form-control" />
-                <span asp-validation-for="IdExpedition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatusCode" class="control-label"></label>
-                <input asp-for="StatusCode" class="form-control" />
-                <span asp-validation-for="StatusCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TrackingNumber" class="control-label"></label>
-                <input asp-for="TrackingNumber" class="form-control" />
-                <span asp-validation-for="TrackingNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdClient" class="control-label"></label>
-                <input asp-for="IdClient" class="form-control" />
-                <span asp-validation-for="IdClient" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdRecipient" class="control-label"></label>
-                <input asp-for="IdRecipient" class="form-control" />
-                <span asp-validation-for="IdRecipient" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Latitude" class="control-label"></label>
-                <input asp-for="Latitude" class="form-control" />
-                <span asp-validation-for="Latitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Longitude" class="control-label"></label>
-                <input asp-for="Longitude" class="form-control" />
-                <span asp-validation-for="Longitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Distance" class="control-label"></label>
-                <input asp-for="Distance" class="form-control" />
-                <span asp-validation-for="Distance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCewHvBMDcMrBFlu3aqp1OhShkwSjWLiBQ&callback=initMap"
+            async></script>
+    <script src="~/maps/Package.js"></script>
 }

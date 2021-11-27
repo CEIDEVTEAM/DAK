@@ -12,5 +12,7 @@ namespace CommonSolution.DTOs
         public string Name { get; set; }
         public int MinPackages { get; set; }
         public string Color { get; set; }
+
+        public List<CoordinateDto> ColVexels { get; set; }
     }
 }

@@ -24,12 +24,16 @@ namespace BusinessLogic.DataModel.Mappers
                 IdExpedition = dto.IdExpedition,
                 StatusCode = dto.StatusCode,
                 TrackingNumber = dto.TrackingNumber,
-                IdClient = dto.IdClient,
-                IdRecipient = dto.IdRecipient,
+                IdClient = int.Parse(dto.IdClient),
+                IdRecipient = int.Parse(dto.IdRecipient),
                 Address = dto.Address,
                 Latitude = dto.Latitude,
                 Longitude = dto.Longitude,
-                Distance = dto.Distance
+                Distance = dto.Distance,
+                Height = dto.Height,
+                Weight = dto.Weight,
+                Length = dto.Length,
+                Width = dto.Width
             };
         }
 
@@ -45,12 +49,16 @@ namespace BusinessLogic.DataModel.Mappers
                 IdExpedition = package.IdExpedition,
                 StatusCode = package.StatusCode,
                 TrackingNumber = package.TrackingNumber,
-                IdClient = package.IdClient,
-                IdRecipient = package.IdRecipient,
+                IdClient = package.IdClient.ToString(),
+                IdRecipient = package.IdRecipient.ToString(),
                 Address = package.Address,
                 Latitude = package.Latitude,
                 Longitude = package.Longitude,
-                Distance = package.Distance
+                Distance = package.Distance,
+                Height = package.Height,
+                Weight = package.Weight,
+                Length = package.Length,
+                Width = package.Width
             };
         }
 

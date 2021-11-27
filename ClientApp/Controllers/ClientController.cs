@@ -75,6 +75,8 @@ namespace ClientApp.Controllers
 
             return ClientTypeList;
         }
+
+        
         #endregion
     }
 }
