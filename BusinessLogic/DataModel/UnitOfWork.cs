@@ -31,12 +31,13 @@ namespace BusinessLogic.DataModel
         }
         public void BeginTransaction()
         {
-            throw new NotImplementedException();
+            _transaction = (DbContextTransaction)this._context.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
         }
 
         public void Commit()
         {
-            throw new NotImplementedException();
+            if (this._transaction != null)
+                this._transaction.Commit();
         }
 
         public void Dispose()
@@ -46,12 +47,13 @@ namespace BusinessLogic.DataModel
 
         public void Rollback()
         {
-            throw new NotImplementedException();
+            if (this._transaction != null)
+                this._transaction.Rollback();
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            this._context.SaveChanges();
         }
     }
 }
