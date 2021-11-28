@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Domain.PackageReception.PaymentMethodStrategies;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Logic;
 using CommonSolution.DTOs;
 using CommonSolution.ENUMs;
@@ -25,7 +26,13 @@ namespace ClientApp.Controllers
         {
             IController lgc = new LFinalClientController();
 
-            List<string> colErrors = lgc.Add(dto);
+            LPackageController prueba = new LPackageController();
+
+            IPaymentMethod creditCard = new MercadoPago();
+            float amount = 1564;
+            bool resp = prueba.ProcessPayment(creditCard, amount);
+
+            //List<string> colErrors = lgc.Add(dto);
 
             //if (colErrors.Count == 0)
             //{

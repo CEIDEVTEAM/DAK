@@ -1,5 +1,4 @@
-﻿using BusinessLogic.DataModel.Repository;
-using DataAccess.Context;
+﻿using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,25 +9,18 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.DataModel
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWorkLocal : IUnitOfWork, IDisposable
     {
-        protected readonly DAKContext _context;
+
+        protected readonly LocalLogDBContext _context;
         protected DbContextTransaction _transaction;
 
-        public CompanyRepository CompanyRepository { get; set; }
-        public FinalClientRepository FinalClientRepository { get; set; }
-        public PackageRepository PackageRepository { get; set; }
-        public DeliveryAreaRepository DeliveryAreaRepository { get; set; }
-        public UnitOfWork()
+        public UnitOfWorkLocal()
         {
-            this._context = new DAKContext();
-            
-            this.CompanyRepository = new CompanyRepository(this._context);
-            this.FinalClientRepository = new FinalClientRepository(this._context);
-            this.PackageRepository = new PackageRepository(this._context);
-            this.DeliveryAreaRepository = new DeliveryAreaRepository(this._context);
+            this._context = new LocalLogDBContext();
 
         }
+
         public void BeginTransaction()
         {
             _transaction = (DbContextTransaction)this._context.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
@@ -42,7 +34,7 @@ namespace BusinessLogic.DataModel
 
         public void Dispose()
         {
-           this._context.Dispose();
+            this._context.Dispose();
         }
 
         public void Rollback()

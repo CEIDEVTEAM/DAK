@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DataModel;
+using BusinessLogic.Domain.PackageReception;
 using BusinessLogic.Interfaces;
 using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
@@ -48,20 +49,16 @@ namespace BusinessLogic.Logic
             throw new NotImplementedException();
         }
 
-        public bool ExistClientByNumber(string number)
+        public bool ProcessPayment(IPaymentMethod paymentMethod, float amount)
         {
-            bool existInCompany;
-            bool existInFClient;
-            using (var uow = new UnitOfWork())
-            {
-                existInCompany = uow.FinalClientRepository.AnyFinalClientByDocument(number.ToString());
-                existInFClient = uow.CompanyRepository.AnyCompanyByRut(number.ToString());
-            }
+            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
 
-            if (existInCompany || existInFClient)
-                return true;
-            return false;
+            bool response = context.ProcessPayment(amount);
+
+            return response;
         }
+
+
 
         //
         //VER SI VAMOS A VALIDAR MSIMO EN EL CONTROLLER O EN OTRA CLASE
