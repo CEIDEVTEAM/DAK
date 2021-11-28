@@ -29,32 +29,32 @@ namespace BusinessLogic.Valdations.ValidationRules
 
         private void WeightValidation()
         {
-            float weigth = dto.Weight;
-            bool isPositive = new PositiveFloatValidationRule().Validate(weigth);
+            double value = (double)dto.Weight;
+            bool isPositive = new PositiveDoubleValidationRule().Validate(value);
             if (!isPositive)
                 this.errors.Add("El Peso debe ser un valor positivo");
         }
 
         private void LengthValidation()
         {
-            float weigth = dto.Length;
-            bool isPositive = new PositiveFloatValidationRule().Validate(weigth);
+            double value = (double)dto.Length;
+            bool isPositive = new PositiveDoubleValidationRule().Validate(value);
             if (!isPositive)
                 this.errors.Add("El Largo  debe ser un valor positivo");
         }
 
         private void WidthValidation()
         {
-            float weigth = dto.Width;
-            bool isPositive = new PositiveFloatValidationRule().Validate(weigth);
+            double value = (double)dto.Width;
+            bool isPositive = new PositiveDoubleValidationRule().Validate(value);
             if (!isPositive)
                 this.errors.Add("El Ancho debe ser un valor positivo");
         }
 
         private void HeigthValidation()
         {
-            float weigth = dto.Height;
-            bool isPositive = new PositiveFloatValidationRule().Validate(weigth);
+            double value = (double)dto.Height;
+            bool isPositive = new PositiveDoubleValidationRule().Validate(value);
             if (!isPositive)
                 this.errors.Add("El Alto debe ser un valor positivo");
         }

@@ -18,6 +18,8 @@ namespace DataAccess.Models
         public string Email { get; set; }
         public string Telephone { get; set; }
         public string UserType { get; set; }
+        public string ActiveFlag { get; set; }
+        public string Password { get; set; }
 
         public virtual ICollection<Log> Logs { get; set; }
     }

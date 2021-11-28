@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Valdations.GlobalValidationsRules
 {
-    public class PositiveFloatValidationRule
+    public class PositiveDoubleValidationRule
     {
         
-        public PositiveFloatValidationRule()
+        public PositiveDoubleValidationRule()
         {
             
         }
 
-        public bool Validate(float value)
+        public bool Validate(double value)
         {
             bool response = false;
             if (value > 0)

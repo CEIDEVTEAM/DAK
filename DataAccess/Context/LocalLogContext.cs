@@ -20,10 +20,10 @@ namespace DataAccess.Context
         {
         }
 
-        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<PaymentParameter> PaymentParameter { get; set; }
         public virtual DbSet<TradingParameter> TradingParameter { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,6 +35,8 @@ namespace DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+
             modelBuilder.Entity<Log>(entity =>
             {
                 entity.ToTable("Log");
@@ -97,6 +99,10 @@ namespace DataAccess.Context
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ActiveFlag)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -110,6 +116,10 @@ namespace DataAccess.Context
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Telephone)

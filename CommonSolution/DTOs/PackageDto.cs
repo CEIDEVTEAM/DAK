@@ -35,10 +35,10 @@ namespace CommonSolution.DTOs
         public string Longitude { get; set; }
         public int Distance { get; set; }
 
-        public float Height { get; set; }
-        public float Width { get; set; }
-        public float Weight { get; set; }
-        public float Length { get; set; }
+        public double? Height { get; set; }
+        public double? Width { get; set; }
+        public double? Weight { get; set; }
+        public double? Length { get; set; }
         public string Type { get; set; }
         public int IdZona { get; set; }
 
