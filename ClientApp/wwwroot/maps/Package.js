@@ -98,17 +98,18 @@ function addPackage() {
 
     var IdClient = document.getElementById("IdClient").value;
     var IdRecipient = document.getElementById("IdRecipient").value;
+    var Address = document.getElementById("Address").value;
     var Height = document.getElementById("Height").value;
     var Width = document.getElementById("Width").value;
     var Weight = document.getElementById("Weight").value;
     var Length = document.getElementById("Length").value;
-    var Type = document.getElementById("dimensions").value;
+    var Type = document.getElementById("selectValue").value;
     var distance = 100;
     if (dto.id != undefined) {
 
         var jSon = {
             IdClient: IdClient, IdRecipient: IdRecipient, Height: Height, Width: Width, Weight: Weight, Length: Length, Type: Type,
-            Latitude: dto.latitud, Longitude: dto.longitud, IdZona: dto.id, Distance: distance,
+            Latitude: dto.latitud, Longitude: dto.longitud, IdZona: dto.id, Distance: distance, Address: Address
         }
 
         $.ajax({

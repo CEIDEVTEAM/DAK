@@ -18,17 +18,26 @@ namespace BusinessLogic.Valdations.ValidationRules
         {
             dto = _dto;
             errors = _errors;
+            this.Validations();
+        }
+
+        private void Validations()
+        {
             this.SenderValidation();
             this.RecipientValidation();
             this.DistanceValidation();
-            this.HeigthValidation();
-            this.WidthValidation();
-            this.LengthValidation();
-            this.WeightValidation();
+            if (dto.Type != "LETTER")
+            {
+                this.HeigthValidation();
+                this.WidthValidation();
+                this.LengthValidation();
+                this.WeightValidation();
+            }
         }
 
         private void WeightValidation()
         {
+
             double value = (double)dto.Weight;
             bool isPositive = new PositiveDoubleValidationRule().Validate(value);
             if (!isPositive)

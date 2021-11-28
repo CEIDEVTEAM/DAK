@@ -19,7 +19,8 @@ namespace BusinessLogic.Logic
         public List<string> Add(IDto Idto)
         {
             PackageDto dto = (PackageDto)Idto;
-            List<string> errors = validatePackage(dto);
+
+            List<string> errors = ValidatePackage(dto);
 
             if (errors.Count == 0)
             {
@@ -28,11 +29,9 @@ namespace BusinessLogic.Logic
                     uow.BeginTransaction();
                     try
                     {
-                        dto.Paid = false;
-                        dto.Date = DateTime.Now;
-                        dto.StatusCode = 1;
-
+                        dto = this.PackageMapping(dto);
                         uow.PackageRepository.Add(dto);
+                        uow.PackageTrackingDatailRespository.Add(this.TrackingDetailMapping(dto.Id));
                         uow.SaveChanges();
                         uow.Commit();
                     }
@@ -56,7 +55,7 @@ namespace BusinessLogic.Logic
             return dto;
         }
 
-        public List<string> validatePackage(PackageDto dto)
+        public List<string> ValidatePackage(PackageDto dto)
         {
             List<string> errors = new List<string>();
             PackageValidationsRules validations = new PackageValidationsRules(dto, errors);
@@ -72,7 +71,49 @@ namespace BusinessLogic.Logic
             return response;
         }
 
+        private PackageTrackingDatailDto TrackingDetailMapping(int idPackage)
+        {
+            return new PackageTrackingDatailDto
+            {
+                IdPackage = idPackage,
+                DateTime = DateTime.Now,
+                StatusCode = 1,
+                Ubication = "DEPOSITO" //TODO HACER CONSTANTE
 
+            };
+        }
+
+        private PackageDto PackageMapping(PackageDto dto)
+        {
+            dto.IdSender = (int)this.GetClientId(dto.IdClient);
+            dto.IdReciever = (int)this.GetClientId(dto.IdRecipient);
+            dto.Paid = false;
+            dto.Date = DateTime.Now;
+            dto.StatusCode = 1;
+            if (dto.Type == "LETTER")
+            {
+                dto.Weight = 0;
+                dto.Width = 0;
+                dto.Length = 0;
+                dto.Height = 0;
+
+            }
+
+            return dto;
+        }
+
+        private int? GetClientId(string number)
+        {
+            int? clientId;
+            using (var uow = new UnitOfWork())
+            {
+                clientId = uow.FinalClientRepository.GetFinalClientByDoc(number);
+                if (clientId == null)
+                    uow.CompanyRepository.GetCompanyIdByRut(number);
+
+            }
+            return clientId;
+        }
         public bool ExistClientByNumber(string clientId)
         {
             bool response = false;
@@ -87,4 +128,6 @@ namespace BusinessLogic.Logic
             return response;
         }
     }
+
+
 }

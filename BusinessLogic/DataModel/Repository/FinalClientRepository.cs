@@ -65,6 +65,9 @@ namespace BusinessLogic.DataModel.Repository
             return _Context.FinalClient.Any(x => x.DocumentNumber == docNumber);
         }
 
-
+        public int? GetFinalClientByDoc(string docNumber)
+        {
+            return _Context.FinalClient.FirstOrDefault(x => x.DocumentNumber == docNumber)?.IdClient;
+        }
     }
 }

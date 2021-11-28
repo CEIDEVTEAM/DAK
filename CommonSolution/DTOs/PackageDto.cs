@@ -29,6 +29,8 @@ namespace CommonSolution.DTOs
         [DisplayName("Destinatario")]
         public string IdRecipient { get; set; }
 
+        public int IdSender { get; set; }
+        public int IdReciever { get; set; }
 
         public string Address { get; set; }
         public string Latitude { get; set; }

@@ -11,11 +11,11 @@ namespace DataAccess.Context
     {
 
         public DAKContext() : base(new DbContextOptions<DAKContext>())
-        { 
-            
+        {
+
         }
 
-        public DAKContext(DbContextOptions<DAKContext> options): base(options)
+        public DAKContext(DbContextOptions<DAKContext> options) : base(options)
         {
         }
 
@@ -236,13 +236,9 @@ namespace DataAccess.Context
 
             modelBuilder.Entity<PackageTrackingDetail>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("PackageTrackingDetail");
 
                 entity.Property(e => e.DateTime).HasColumnType("datetime");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Ubication)
                     .IsRequired()
@@ -250,13 +246,13 @@ namespace DataAccess.Context
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdPackageNavigation)
-                    .WithMany()
+                    .WithMany(p => p.PackageTrackingDetails)
                     .HasForeignKey(d => d.IdPackage)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Package_TDetail");
 
                 entity.HasOne(d => d.StatusCodeNavigation)
-                    .WithMany()
+                    .WithMany(p => p.PackageTrackingDetails)
                     .HasForeignKey(d => d.StatusCode)
                     .HasConstraintName("FK_Status_TDetail");
             });

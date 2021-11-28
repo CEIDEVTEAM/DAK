@@ -7,6 +7,11 @@ namespace DataAccess.Models
 {
     public partial class Package
     {
+        public Package()
+        {
+            PackageTrackingDetails = new HashSet<PackageTrackingDetail>();
+        }
+
         public int Id { get; set; }
         public bool Paid { get; set; }
         public DateTime Date { get; set; }
@@ -28,5 +33,6 @@ namespace DataAccess.Models
         public virtual Client IdClientNavigation { get; set; }
         public virtual DeliveryArea IdDeliveryAreaNavigation { get; set; }
         public virtual Client IdRecipientNavigation { get; set; }
+        public virtual ICollection<PackageTrackingDetail> PackageTrackingDetails { get; set; }
     }
 }

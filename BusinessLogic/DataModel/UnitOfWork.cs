@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.DataModel.Repository;
 using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,12 +14,13 @@ namespace BusinessLogic.DataModel
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         protected readonly DAKContext _context;
-        protected DbContextTransaction _transaction;
+        protected IDbContextTransaction _transaction;
 
         public CompanyRepository CompanyRepository { get; set; }
         public FinalClientRepository FinalClientRepository { get; set; }
         public PackageRepository PackageRepository { get; set; }
         public DeliveryAreaRepository DeliveryAreaRepository { get; set; }
+        public PackageTrackingDatailRespository PackageTrackingDatailRespository { get; set; }
         public UnitOfWork()
         {
             this._context = new DAKContext();
@@ -27,11 +29,12 @@ namespace BusinessLogic.DataModel
             this.FinalClientRepository = new FinalClientRepository(this._context);
             this.PackageRepository = new PackageRepository(this._context);
             this.DeliveryAreaRepository = new DeliveryAreaRepository(this._context);
+            this.PackageTrackingDatailRespository = new PackageTrackingDatailRespository(this._context);
 
         }
         public void BeginTransaction()
         {
-            _transaction = (DbContextTransaction)this._context.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+            this._transaction = this._context.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
         }
 
         public void Commit()

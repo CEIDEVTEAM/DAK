@@ -14,22 +14,22 @@ namespace BusinessLogic.DataModel.Repository
 {
     public class PackageRepository
     {
-        private PackageStatusMapper _PackageStatusMapper;
+        
         private PackageMapper _PackageMapper;
         private readonly DAKContext _Context;
         public PackageRepository(DAKContext context)
         {
-            this._PackageStatusMapper = new PackageStatusMapper();
+            
             this._PackageMapper = new PackageMapper();
             this._Context = context;
         }
 
-        public void Add(IDto dto)
-        {
+        public void Add(PackageDto dto)
+        {           
             Package packageEntity = this._PackageMapper.MapToEntity(dto);
             _Context.Package.Add(packageEntity);
-            
-
+            _Context.SaveChanges();
+            dto.Id = packageEntity.Id;
         }
 
         public List<PackageDto> GetAll()

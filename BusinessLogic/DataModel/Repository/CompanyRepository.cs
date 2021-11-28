@@ -52,5 +52,11 @@ namespace BusinessLogic.DataModel.Repository
         {
             return _Context.Company.Any(x => x.Rut == rutNumber);
         }
+        public int? GetCompanyIdByRut(string rutNumber)
+        {
+            return _Context.Company.FirstOrDefault(x => x.Rut == rutNumber)?.IdClient;
+        }
+
+        
     }
 }
