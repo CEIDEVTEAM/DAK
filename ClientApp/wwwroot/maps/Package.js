@@ -103,7 +103,7 @@ function addPackage() {
     var Weight = document.getElementById("Weight").value;
     var Length = document.getElementById("Length").value;
     var Type = document.getElementById("dimensions").value;
-    var distance = calculateDistance();
+    var distance = 100;
     if (dto.id != undefined) {
 
         var jSon = {
@@ -365,33 +365,33 @@ function hideDivMap() {
 
 //    return distanceList;
 //}
-var service = new google.maps.DistanceMatrixService();
-function calculateDistance() {
-    var origin = { lat: 39.866667, lng: -4.033333 };
-    var destination = { lat: 40.866667, lng: -5.033333 };
-    service.getDistanceMatrix(
-        {
-            origins: [origin],
-            destinations: [destination],
-            travelMode: google.maps.TravelMode.DRIVING,
-            avoidHighways: false,
-            avoidTolls: false,
-            unitSystem: google.maps.UnitSystem.IMPERIAL
-        },
-        callback
-    );
-}
-function callback(response, status) {
-    var orig = { lat: 39.866667, lng: -4.033333 },
-        dest = { lat: 40.866667, lng: -5.033333 },
-        dist = "";
+//var service = new google.maps.DistanceMatrixService();
+//function calculateDistance() {
+//    var origin = { lat: 39.866667, lng: -4.033333 };
+//    var destination = { lat: 40.866667, lng: -5.033333 };
+//    service.getDistanceMatrix(
+//        {
+//            origins: [origin],
+//            destinations: [destination],
+//            travelMode: google.maps.TravelMode.DRIVING,
+//            avoidHighways: false,
+//            avoidTolls: false,
+//            unitSystem: google.maps.UnitSystem.IMPERIAL
+//        },
+//        callback
+//    );
+//}
+//function callback(response, status) {
+//    var orig = { lat: 39.866667, lng: -4.033333 },
+//        dest = { lat: 40.866667, lng: -5.033333 },
+//        dist = "";
 
-    if (status == "OK") {
-        orig.value = response.originAddresses[0];
-        dest.value = response.destinationAddresses[0];
-        dist.value = response.rows[0].elements[0].distance.text;
-    } else {
-        alert("Error: " + status);
-    }
-}
-google.maps.event.addDomListener(window, "load", calculateDistance);
+//    if (status == "OK") {
+//        orig.value = response.originAddresses[0];
+//        dest.value = response.destinationAddresses[0];
+//        dist.value = response.rows[0].elements[0].distance.text;
+//    } else {
+//        alert("Error: " + status);
+//    }
+//}
+//google.maps.event.addDomListener(window, "load", calculateDistance);
