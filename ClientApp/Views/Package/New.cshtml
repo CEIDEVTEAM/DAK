@@ -72,7 +72,7 @@
                     </div>
                     <hr />
                     <div class="form-group">
-                        <input type="submit" value="Procesar" class="btn btn-primary" id="smBut" />
+                        <input value="Procesar" class="btn btn-primary" id="smBut" />
                         <input type="button" value="Destino" class="btn btn-secondary" id="btnDir" onclick="hideDivMap()" />
                     </div>
                 </form>
@@ -80,6 +80,8 @@
             <div class="col-md-4">
                 <hr />
                 <div id="map" class="form-group" style="width: 800px; height: 600px;display:none"></div>
+                <div id="response"></div>
+                <div id="request"></div>
                 <hr />
             </div>
         </div>
@@ -92,6 +94,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCewHvBMDcMrBFlu3aqp1OhShkwSjWLiBQ&callback=initMap"
-            async></script>
+            async>"
+            </script>
     <script src="~/maps/Package.js"></script>
 }

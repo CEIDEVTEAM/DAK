@@ -18,14 +18,18 @@ namespace CommonSolution.DTOs
         public int? IdExpedition { get; set; }
         public int StatusCode { get; set; }
         public string TrackingNumber { get; set; }
-        [Remote(action: "ValidateRemitent", controller: "Package", ErrorMessage = "Remote validation is working")]
+
+        [Remote(action: "ValidateRemitent", controller: "Package", ErrorMessage = "El Cliente (remitente) no existe")]
         [Required(ErrorMessage = "Remitente Requerido")]
         [DisplayName("Remitente")]
         public string IdClient { get; set; }
-        [Remote("ValidateRecipient", "Package", ErrorMessage = "El Cliente no existe")]
+
+        [Remote("ValidateRecipient", "Package", ErrorMessage = "El Cliente (destinatario) no existe")]
         [Required(ErrorMessage = "Destinatario Requerido")]
         [DisplayName("Destinatario")]
         public string IdRecipient { get; set; }
+
+
         public string Address { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
@@ -36,6 +40,7 @@ namespace CommonSolution.DTOs
         public float Weight { get; set; }
         public float Length { get; set; }
         public string Type { get; set; }
+        public int IdZona { get; set; }
 
     }
 }

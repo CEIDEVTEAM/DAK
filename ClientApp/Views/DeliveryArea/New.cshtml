@@ -28,12 +28,18 @@
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Color" class="control-label"></label>
-                        <input type = "color" asp-for="Color" class="form-control" />
-                        <span asp-validation-for="Color" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col">
+                            <label asp-for="Color" class="control-label"></label>
+                            <input type="color" asp-for="Color" class="form-control" />
+                            <span asp-validation-for="Color" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="MinPackages" class="control-label"></label>
+                            <input asp-for="MinPackages" class="form-control" />
+                            <span asp-validation-for="MinPackages" class="text-danger"></span>
+                        </div>
                     </div>
-
                     <div class="form-group">
                         <input onclick="deleteMarkers();" type="button" value="Borrar Markers" class="btn btn-default" />
                         <input id="btn2" type="button" value="Crear" class="btn btn-default" />

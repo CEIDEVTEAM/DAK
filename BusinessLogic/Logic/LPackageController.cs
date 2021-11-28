@@ -48,7 +48,7 @@ namespace BusinessLogic.Logic
             throw new NotImplementedException();
         }
 
-        public bool ExistClientByNumber(int number)
+        public bool ExistClientByNumber(string number)
         {
             bool existInCompany;
             bool existInFClient;

@@ -67,7 +67,7 @@ namespace BusinessLogic.DataModel.Mappers
             {
 
                 Latitude = entity.Latitude,
-                Longitude = entity.Latitude,
+                Longitude = entity.Longitude,
                 IdDeliveryArea = entity.IdDeliveryArea,
                 OrderNumber = (int)entity.OrderNumber,
                 

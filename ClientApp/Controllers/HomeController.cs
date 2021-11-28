@@ -1,4 +1,6 @@
-﻿using ClientApp.Models;
+﻿using BusinessLogic.Logic;
+using ClientApp.Models;
+using CommonSolution.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,10 +19,22 @@ namespace ClientApp.Controllers
         {
             _logger = logger;
         }
-
+        public ActionResult Index1()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult PopulatePolygons()
+        {
+            LDeliveryAreaController lgc = new LDeliveryAreaController();
+            List<DeliveryAreaDto> colDto = lgc.GetAllAreas();
+
+            return Json(colDto);
         }
 
         public IActionResult Privacy()

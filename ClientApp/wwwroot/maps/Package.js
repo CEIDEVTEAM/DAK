@@ -1,4 +1,7 @@
-﻿window.onload = initMap;
+﻿//const { relativeTimeRounding } = require("../adminlte/plugins/moment/moment-with-locales");
+
+
+window.onload = initMap;
 
 var map;
 var marker;
@@ -15,7 +18,7 @@ function initMap() {
         mapTypeId: "roadmap",
     });
 
-    document.getElementById("smBut").addEventListener("click", addReclamo);
+    document.getElementById("smBut").addEventListener("click", addPackage);
 
     handleResponse();
 }
@@ -91,21 +94,27 @@ function showArrays(event) {
 
 
 //nuevo paquete
-function addReclamo() {
-    var obs = document.getElementById("IdClient").value;
-    var tpReclamo = document.getElementById("IdRecipient").value;
+function addPackage() {
 
+    var IdClient = document.getElementById("IdClient").value;
+    var IdRecipient = document.getElementById("IdRecipient").value;
+    var Height = document.getElementById("Height").value;
+    var Width = document.getElementById("Width").value;
+    var Weight = document.getElementById("Weight").value;
+    var Length = document.getElementById("Length").value;
+    var Type = document.getElementById("dimensions").value;
+    var distance = calculateDistance();
     if (dto.id != undefined) {
 
         var jSon = {
-            observaciones: obs, nombreTipoReclamo: tpReclamo,
-            latitudReclamo: dto.latitud, longitudReclamo: dto.longitud, idZona: dto.id
+            IdClient: IdClient, IdRecipient: IdRecipient, Height: Height, Width: Width, Weight: Weight, Length: Length, Type: Type,
+            Latitude: dto.latitud, Longitude: dto.longitud, IdZona: dto.id, Distance: distance,
         }
 
         $.ajax({
             type: 'POST',
             data: jSon,
-            url: 'AddReclamo',
+            url: 'AddPackage',
             success: function (respuesta) {
 
             },
@@ -164,38 +173,6 @@ function createPoly(coordinates) {
 
 
 //imprimir zonas
-function getZona(polygon) {
-    var poligono = polygon;
-    var vertices = poligono.getPath();
-    var valTxtNombre = document.getElementById("nombre").value;
-    var valTxtColor = document.getElementById("colorPicker").value;
-    var colCords = [];
-
-
-    for (let i = 0; i < vertices.getLength(); i++) {
-        const xy = vertices.getAt(i);
-        let lat = xy.lat();
-        let long = xy.lng();
-        let hash = i;
-
-        colCords.push({ latitud: lat, longitud: long, orden: hash })
-
-    }
-    var json = { nombre: valTxtNombre, color: valTxtColor, colVertices: colCords }
-    $.ajax({
-        type: 'POST',
-        data: json,
-        url: 'AddZona',
-        success: function (respuesta) {
-
-        },
-        error: function (respuesta) {
-
-        }
-    })
-
-
-}
 
 function handleResponse() {
 
@@ -217,25 +194,25 @@ function handleResponse() {
     })
 
 }
-
 function zonesPopulate(item) {
 
     var coords = [];
-    var orderVerts = item.colVertices.sort((a, b) => {
-        return a.orden - b.orden;
+    var orderVerts = item.colVexels.sort((a, b) => {
+        return a.ordenNumber - b.ordenNumber;
     });
 
     for (let i = 0; i < orderVerts.length; i++) {
 
-        let latitude = parseFloat(item.colVertices[i].latitud);
-        let long = parseFloat(item.colVertices[i].longitud);
-        let singleCoord = { lat: latitude, lng: long };
+        let longitude = parseFloat(item.colVexels[i].longitude);
+        let latitude = parseFloat(item.colVexels[i].latitude);
+        let singleCoord = { lat: latitude, lng: longitude };
         coords.push(singleCoord);
 
     }
 
     var color = item.color;
-    var nombre = item.nombre;
+    var nombre = item.name;
+    var rActivos = item.reclamosActivos;
     var id = item.id;
 
     const polyCoords = coords;
@@ -243,9 +220,10 @@ function zonesPopulate(item) {
     const polygon = new google.maps.Polygon({
         id: id,
         name: nombre,
+        count: rActivos,
         paths: polyCoords,
         strokeColor: color,
-        strokeOpacity: 0.2,
+        strokeOpacity: 0.5,
         strokeWeight: 3,
         fillColor: color,
         fillOpacity: 0.2,
@@ -259,6 +237,7 @@ function zonesPopulate(item) {
     infoWindow = new google.maps.InfoWindow();
 
 }
+
 function createPoint(map) {
 
     // creates a draggable marker to the given coords
@@ -294,7 +273,7 @@ function hideDivDimensions(value) {
 }
 
 function hideDivMap() {
-    
+
     var x = document.getElementById("map");
     if (x.style.display === "none") {
         x.style.display = "block";
@@ -302,3 +281,117 @@ function hideDivMap() {
         x.style.display = "none";
     }
 }
+
+
+//function distance(map) {
+//    // initialize services
+//    const geocoder = new google.maps.Geocoder();
+//    const service = new google.maps.DistanceMatrixService();
+//    // build request
+//    const origin = { lat: 39.866667, lng: -4.033333 };
+
+//    const destination = { lat: 50.087, lng: 14.421 };
+//    const request = {
+//        origins: [origin],
+//        destinations: [destination],
+//        travelMode: google.maps.TravelMode.DRIVING,
+//        unitSystem: google.maps.UnitSystem.METRIC,
+//        avoidHighways: false,
+//        avoidTolls: false,
+//    };
+
+//    var originList;
+//    var destinationList;
+//    var distanceList;
+
+//    // put request on page
+//    document.getElementById("request").innerText = JSON.stringify(
+//        request,
+//        null,
+//        2
+//    );
+//    // get distance matrix response
+//    service.getDistanceMatrix(request).then((response) => {
+//        // put response
+//        document.getElementById("response").innerText = JSON.stringify(
+//            response,
+//            null,
+//            2
+//        );
+
+//        // show on map
+//        const originList = response.originAddresses;
+//        const destinationList = response.destinationAddresses;
+
+
+
+//        const showGeocodedAddressOnMap = (asDestination) => {
+//            const handler = ({ results }) => {
+//                map.fitBounds(bounds.extend(results[0].geometry.location));
+//                markersArray.push(
+//                    new google.maps.Marker({
+//                        map,
+//                        position: results[0].geometry.location,
+//                        label: asDestination ? "D" : "O",
+//                    })
+//                );
+//            };
+//            return handler;
+//        };
+
+//        for (let i = 0; i < originList.length; i++) {
+//            const results = response.rows[i].elements;
+
+//            geocoder
+//                .geocode({ address: originList[i] })
+//                .then(showGeocodedAddressOnMap(false));
+
+//            for (let j = 0; j < results.length; j++) {
+//                geocoder
+//                    .geocode({ address: destinationList[j] })
+//                    .then(showGeocodedAddressOnMap(true));
+//            }
+//        }
+//    });
+
+//    // show on map
+
+//    originList = response.originAddresses;
+//    destinationList = response.destinationAddresses;
+//    distanceList = response.rows[0].elements[0].distance.value;
+
+//    // show on map
+
+
+//    return distanceList;
+//}
+var service = new google.maps.DistanceMatrixService();
+function calculateDistance() {
+    var origin = { lat: 39.866667, lng: -4.033333 };
+    var destination = { lat: 40.866667, lng: -5.033333 };
+    service.getDistanceMatrix(
+        {
+            origins: [origin],
+            destinations: [destination],
+            travelMode: google.maps.TravelMode.DRIVING,
+            avoidHighways: false,
+            avoidTolls: false,
+            unitSystem: google.maps.UnitSystem.IMPERIAL
+        },
+        callback
+    );
+}
+function callback(response, status) {
+    var orig = { lat: 39.866667, lng: -4.033333 },
+        dest = { lat: 40.866667, lng: -5.033333 },
+        dist = "";
+
+    if (status == "OK") {
+        orig.value = response.originAddresses[0];
+        dest.value = response.destinationAddresses[0];
+        dist.value = response.rows[0].elements[0].distance.text;
+    } else {
+        alert("Error: " + status);
+    }
+}
+google.maps.event.addDomListener(window, "load", calculateDistance);

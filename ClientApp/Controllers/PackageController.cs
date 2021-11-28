@@ -34,16 +34,28 @@ namespace ClientApp.Controllers
 
             return TypeList;
         }
-        // GET: PackageController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: PackageController/Create
-        public ActionResult Create()
+        public ActionResult AddPackage(PackageDto dto)
         {
-            return View();
+            IController lgc = new LPackageController();
+
+            List<string> colErrors = lgc.Add(dto);
+
+            //if (colErrors.Count == 0)
+            //{
+            //    Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
+            //    ModelState.Clear();
+            //}
+
+            return RedirectToAction("New");
+        }
+        [HttpGet]
+        public JsonResult PopulatePolygons()
+        {
+            LDeliveryAreaController lgc = new LDeliveryAreaController();
+            List<DeliveryAreaDto> colDto = lgc.GetAllAreas();
+
+            return Json(colDto);
         }
 
         [HttpGet]
@@ -54,14 +66,8 @@ namespace ClientApp.Controllers
             return Json(new { data = dto });
         }
 
-        // GET: PackageController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-
-        public JsonResult ValidateRemitent(int IdClient)
+        public JsonResult ValidateRemitent(string IdClient)
         {
             bool response = false;
             LPackageController lgc = new LPackageController();
@@ -73,12 +79,12 @@ namespace ClientApp.Controllers
                 return Json(data: false);
         }
 
-        public JsonResult ValidateRecipient(int IdClient)
+        public JsonResult ValidateRecipient(string IdRecipient)
         {
             bool response = false;
             LPackageController lgc = new LPackageController();
 
-            response = lgc.ExistClientByNumber(IdClient);
+            response = lgc.ExistClientByNumber(IdRecipient);
             if (response)
                 return Json(data: true);
             else

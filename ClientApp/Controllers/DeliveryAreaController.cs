@@ -20,7 +20,7 @@ namespace ClientApp.Controllers
             LDeliveryAreaController lgc = new LDeliveryAreaController();
             lgc.AddDeliveryArea(dto);
 
-            return View();
+            return RedirectToAction("New");
         }
 
         [HttpGet]
