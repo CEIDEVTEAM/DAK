@@ -10,7 +10,6 @@ namespace DataAccess.Models
         public int Id { get; set; }
         public string Truck { get; set; }
         public DateTime Date { get; set; }
-        public int IdDeliveryArea { get; set; }
 
         public virtual DeliveryArea IdNavigation { get; set; }
     }

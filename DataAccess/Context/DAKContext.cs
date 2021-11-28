@@ -41,6 +41,7 @@ namespace DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
             modelBuilder.Entity<Client>(entity =>
             {
@@ -130,6 +131,8 @@ namespace DataAccess.Context
             {
                 entity.ToTable("Expedition");
 
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.Property(e => e.Truck)
@@ -205,17 +208,16 @@ namespace DataAccess.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Package_IdClient");
 
+                entity.HasOne(d => d.IdDeliveryAreaNavigation)
+                    .WithMany(p => p.Packages)
+                    .HasForeignKey(d => d.IdDeliveryArea)
+                    .HasConstraintName("FK_Package_DelevyArea");
+
                 entity.HasOne(d => d.IdRecipientNavigation)
                     .WithMany(p => p.PackageIdRecipientNavigations)
                     .HasForeignKey(d => d.IdRecipient)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Package_IdRecipient");
-
-                entity.HasOne(d => d.StatusCodeNavigation)
-                    .WithMany(p => p.Packages)
-                    .HasForeignKey(d => d.StatusCode)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Package_StatusCode");
             });
 
             modelBuilder.Entity<PackageStatus>(entity =>
@@ -246,6 +248,17 @@ namespace DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.IdPackageNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.IdPackage)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Package_TDetail");
+
+                entity.HasOne(d => d.StatusCodeNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.StatusCode)
+                    .HasConstraintName("FK_Status_TDetail");
             });
 
             modelBuilder.Entity<PaymentRecord>(entity =>

@@ -19,12 +19,14 @@ namespace DataAccess.Models
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public int Distance { get; set; }
-        public float Height { get; set; }
-        public float Width { get; set; }
-        public float Weight { get; set; }
-        public float Length { get; set; }
+        public double? Height { get; set; }
+        public double? Width { get; set; }
+        public double? Weight { get; set; }
+        public double? Length { get; set; }
+        public int? IdDeliveryArea { get; set; }
+
         public virtual Client IdClientNavigation { get; set; }
+        public virtual DeliveryArea IdDeliveryAreaNavigation { get; set; }
         public virtual Client IdRecipientNavigation { get; set; }
-        public virtual PackageStatus StatusCodeNavigation { get; set; }
     }
 }
