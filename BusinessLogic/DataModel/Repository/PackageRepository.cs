@@ -28,7 +28,7 @@ namespace BusinessLogic.DataModel.Repository
         {
             Package packageEntity = this._PackageMapper.MapToEntity(dto);
             _Context.Package.Add(packageEntity);
-            _Context.SaveChanges();
+            
 
         }
 

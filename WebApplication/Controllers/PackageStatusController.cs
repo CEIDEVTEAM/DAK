@@ -16,7 +16,7 @@ namespace WebApplication.Controllers
     public class PackageStatusController : ControllerBase
     {
         //public readonly DakDbContext _context;
-        public readonly LocalLogContext _LogContext;
+        //public readonly LocalLogContext _LogContext;
 
         //public PackageStatusController(DakDbContext context, LocalLogContext logContext)
         //{

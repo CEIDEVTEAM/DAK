@@ -37,7 +37,7 @@ namespace ClientApp.Controllers
 
         public ActionResult AddPackage(PackageDto dto)
         {
-            IController lgc = new LPackageController();
+            LPackageController lgc = new LPackageController();
 
             List<string> colErrors = lgc.Add(dto);
 

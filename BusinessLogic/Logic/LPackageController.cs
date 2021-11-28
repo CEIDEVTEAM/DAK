@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.DataModel;
 using BusinessLogic.Domain.PackageReception;
 using BusinessLogic.Interfaces;
+using BusinessLogic.Valdations.ValidationRules;
 using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
@@ -13,22 +14,33 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Logic
 {
-    public class LPackageController : IController
+    public class LPackageController
     {
         public List<string> Add(IDto Idto)
         {
-            List<string> errors = new List<string>();
             PackageDto dto = (PackageDto)Idto;
+            List<string> errors = validatePackage(dto);
 
-            using (var uow = new UnitOfWork())
+            if (errors.Count == 0)
             {
-                if (errors.Count == 0)
+                using (var uow = new UnitOfWork())
                 {
-                    dto.Paid = false;
-                    dto.Date = DateTime.Now;
-                    dto.StatusCode = 1;
+                    uow.BeginTransaction();
+                    try
+                    {
+                        dto.Paid = false;
+                        dto.Date = DateTime.Now;
+                        dto.StatusCode = 1;
 
-                    uow.PackageRepository.Add(dto);
+                        uow.PackageRepository.Add(dto);
+                        uow.SaveChanges();
+                        uow.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        errors.Add("Error al comunicarse con la base de datos");
+                        uow.Rollback();
+                    }
                 }
             }
             return errors;
@@ -44,9 +56,11 @@ namespace BusinessLogic.Logic
             return dto;
         }
 
-        public IDto GetById(int id)
+        public List<string> validatePackage(PackageDto dto)
         {
-            throw new NotImplementedException();
+            List<string> errors = new List<string>();
+            PackageValidationsRules validations = new PackageValidationsRules(dto, errors);
+            return errors;
         }
 
         public bool ProcessPayment(IPaymentMethod paymentMethod, float amount)
@@ -59,17 +73,18 @@ namespace BusinessLogic.Logic
         }
 
 
-
-        //
-        //VER SI VAMOS A VALIDAR MSIMO EN EL CONTROLLER O EN OTRA CLASE
-        //QUE VALIDACIONES VAMOS A TENER ?? SOLO DE TIPOS DE DATO?
-        //
-        //
-        public List<string> ValidateClient(IDto dto)
+        public bool ExistClientByNumber(string clientId)
         {
-            List<string> errors = new List<string>();
+            bool response = false;
+            using (var uow = new UnitOfWork())
+            {
+                bool existFClient = uow.FinalClientRepository.AnyFinalClientByDocument(clientId);
+                bool existCompany = uow.CompanyRepository.AnyCompanyByRut(clientId);
 
-            return errors;
+                if (existCompany || existFClient)
+                    response = true;
+            }
+            return response;
         }
     }
 }
