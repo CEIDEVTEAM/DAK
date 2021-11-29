@@ -109,7 +109,7 @@ function addPackage() {
 
         var jSon = {
             IdClient: IdClient, IdRecipient: IdRecipient, Height: Height, Width: Width, Weight: Weight, Length: Length, Type: Type,
-            Latitude: dto.latitud, Longitude: dto.longitud, IdZona: dto.id, Distance: distance, Address: Address
+            Latitude: dto.latitud, Longitude: dto.longitud, IdDeliveryArea: dto.id, Distance: distance, Address: Address
         }
 
         $.ajax({
@@ -117,7 +117,15 @@ function addPackage() {
             data: jSon,
             url: 'AddPackage',
             success: function (respuesta) {
-
+                hideDivMap();
+                document.getElementById("IdClient").value="";
+                document.getElementById("IdRecipient").value = "";
+                document.getElementById("Address").value = "";
+                document.getElementById("Height").value = "";
+                document.getElementById("Width").value = "";
+                document.getElementById("Weight").value = "";
+                document.getElementById("Length").value = "";
+                document.getElementById("selectValue").value = "";
             },
             error: function (respuesta) {
 

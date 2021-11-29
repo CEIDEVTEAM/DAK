@@ -28,11 +28,7 @@ namespace ClientApp.Controllers
 
             LPackageController prueba = new LPackageController();
 
-            IPaymentMethod creditCard = new MercadoPago();
-            float amount = 1564;
-            bool resp = prueba.ProcessPayment(creditCard, amount);
-
-            //List<string> colErrors = lgc.Add(dto);
+            List<string> colErrors = lgc.Add(dto);
 
             //if (colErrors.Count == 0)
             //{
@@ -62,7 +58,7 @@ namespace ClientApp.Controllers
             //    ModelState.Clear();
             //}
 
-            return RedirectToAction("NewCompany  ");
+            return RedirectToAction("NewCompany");
         }
 
 

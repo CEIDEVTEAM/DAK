@@ -17,9 +17,11 @@ namespace ClientApp.Controllers
         // GET: PackageController
         public ActionResult New()
         {
+            
             ViewBag.colTypeSelect = GetSelectType();
             return View();
         }
+        
         public List<SelectListItem> GetSelectType()
         {
             IEnumerable<PackageTypeEnum> colPackageTypeEnum = Enum.GetValues(typeof(PackageTypeEnum)).Cast<PackageTypeEnum>();
@@ -47,7 +49,7 @@ namespace ClientApp.Controllers
             //    ModelState.Clear();
             //}
 
-            return RedirectToAction("New");
+            return Redirect("New");
         }
         [HttpGet]
         public JsonResult PopulatePolygons()
