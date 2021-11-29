@@ -36,5 +36,20 @@ namespace BusinessLogic.DataModel.Repository
         {
             return this._PackageMapper.MapToDto(this._Context.Package.AsNoTracking().ToList());
         }
+
+        public void Update(PackageDto dto)
+        {
+            Package trann = this.GetById(dto.Id);
+            trann.Price = dto.Price;
+            trann.Paid = dto.Paid;
+            this._Context.Package.Attach(trann);
+            this._Context.Entry(trann).State = EntityState.Modified;
+
+        }
+
+        public Package GetById(int id)
+        {
+            return this._Context.Package.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

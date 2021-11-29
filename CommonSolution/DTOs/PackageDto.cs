@@ -43,6 +43,7 @@ namespace CommonSolution.DTOs
         public double? Length { get; set; }
         public string Type { get; set; }
         public int IdZona { get; set; }
+        public double? Price { get; set; }
 
     }
 }

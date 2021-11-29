@@ -33,7 +33,8 @@ namespace BusinessLogic.DataModel.Mappers
                 Height = dto.Height,
                 Weight = dto.Weight,
                 Length = dto.Length,
-                Width = dto.Width
+                Width = dto.Width,
+                Price = dto.Price
             };
         }
 
@@ -58,7 +59,8 @@ namespace BusinessLogic.DataModel.Mappers
                 Height = package.Height,
                 Weight = package.Weight,
                 Length = package.Length,
-                Width = package.Width
+                Width = package.Width,
+                Price = package.Price
             };
         }
 

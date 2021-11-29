@@ -5,7 +5,7 @@ using BusinessLogic.Valdations.ValidationRules;
 using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
-
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +34,8 @@ namespace BusinessLogic.Logic
                         uow.PackageTrackingDatailRespository.Add(this.TrackingDetailMapping(dto.Id));
                         uow.SaveChanges();
                         uow.Commit();
+                        this.CalculatePrice(dto);
+
                     }
                     catch (Exception ex)
                     {
@@ -43,6 +45,46 @@ namespace BusinessLogic.Logic
                 }
             }
             return errors;
+        }
+
+        public List<string> UpdatePackage(PackageDto dto)
+        {
+
+            List<string> errors = ValidatePackage(dto);
+
+            if (errors.Count == 0)
+            {
+                using (var uow = new UnitOfWork())
+                {
+                    uow.BeginTransaction();
+                    try
+                    {
+                        uow.PackageRepository.Update(dto);
+
+                        uow.SaveChanges();
+                        uow.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        errors.Add("Error al comunicarse con la base de datos");
+                        uow.Rollback();
+                    }
+                }
+            }
+            return errors;
+        }
+
+        private void CalculatePrice(PackageDto dto)
+        {
+            ClientGroupContext clientContex = new ClientGroupContext();
+            string clientType = this.GetClientType(dto.IdSender);
+            if (!string.IsNullOrEmpty(clientType))
+            {
+                clientContex.SetStrategy(clientType);
+                dto.Price = clientContex.CalculatePrice(dto);
+
+                this.UpdatePackage(dto);
+            }
         }
 
         public List<PackageDto> GetAll()
@@ -113,6 +155,16 @@ namespace BusinessLogic.Logic
 
             }
             return clientId;
+        }
+
+        private string GetClientType(int id)
+        {
+            string clientType;
+            using (var uow = new UnitOfWork())
+            {
+                clientType = uow.FinalClientRepository.GetClientType(id);
+            }
+            return clientType;
         }
         public bool ExistClientByNumber(string clientId)
         {

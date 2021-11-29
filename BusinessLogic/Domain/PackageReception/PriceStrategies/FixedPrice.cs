@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DataModel;
 using BusinessLogic.Interfaces;
+using CommonSolution.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace BusinessLogic.Domain.PackageReception.PriceStrategies
 {
     public class FixedPrice : IClientGroup
     {
-        public float CalculatePrice()
+        public float CalculatePrice(PackageDto dto)
         {
             float price = 0;
-            
-            using (var uow = new UnitOfWork())
+            string fixedPrice = "FIXED_PRICE";
+            using (var uow = new UnitOfWorkLocal())
             {
-                
+                price = (float)uow.tradingParametersRepository.GetPriceByCodeName(fixedPrice);
             }
 
             return price;

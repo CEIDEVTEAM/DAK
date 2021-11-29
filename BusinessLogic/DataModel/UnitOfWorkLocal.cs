@@ -1,5 +1,7 @@
-﻿using DataAccess.Context;
+﻿using BusinessLogic.DataModel.Repository;
+using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,17 +15,19 @@ namespace BusinessLogic.DataModel
     {
 
         protected readonly LocalLogDBContext _context;
-        protected DbContextTransaction _transaction;
+        protected IDbContextTransaction _transaction;
+        public TradingParametersRepository tradingParametersRepository { get; set; }
 
         public UnitOfWorkLocal()
         {
             this._context = new LocalLogDBContext();
+            this.tradingParametersRepository = new TradingParametersRepository(_context);
 
         }
 
         public void BeginTransaction()
         {
-            _transaction = (DbContextTransaction)this._context.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+            this._transaction = this._context.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
         }
 
         public void Commit()

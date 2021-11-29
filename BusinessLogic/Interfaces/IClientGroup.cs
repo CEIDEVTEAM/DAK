@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonSolution.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace BusinessLogic.Interfaces
 {
     public interface IClientGroup
     {
-        float CalculatePrice();
+        float CalculatePrice(PackageDto dto);
     }
 }

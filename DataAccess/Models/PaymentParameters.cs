@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataAccess.Models
 {
-    public partial class PaymentParameter
+    public partial class PaymentParameters
     {
         public int Id { get; set; }
         public string PaymentMethod { get; set; }

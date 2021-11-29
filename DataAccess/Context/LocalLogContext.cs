@@ -11,7 +11,7 @@ namespace DataAccess.Context
 
     public partial class LocalLogDBContext : DbContext
     {
-        public LocalLogDBContext()
+        public LocalLogDBContext() : base(new DbContextOptions<LocalLogDBContext>())
         {
         }
 
@@ -21,8 +21,8 @@ namespace DataAccess.Context
         }
 
         public virtual DbSet<Log> Log { get; set; }
-        public virtual DbSet<PaymentParameter> PaymentParameter { get; set; }
-        public virtual DbSet<TradingParameter> TradingParameter { get; set; }
+        public virtual DbSet<PaymentParameters> PaymentParameters { get; set; }
+        public virtual DbSet<TradingParameters> TradingParameters { get; set; }
         public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -60,7 +60,7 @@ namespace DataAccess.Context
                     .HasConstraintName("FK_Log_User");
             });
 
-            modelBuilder.Entity<PaymentParameter>(entity =>
+            modelBuilder.Entity<PaymentParameters>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -77,7 +77,7 @@ namespace DataAccess.Context
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TradingParameter>(entity =>
+            modelBuilder.Entity<TradingParameters>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 

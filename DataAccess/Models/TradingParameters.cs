@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataAccess.Models
 {
-    public partial class TradingParameter
+    public partial class TradingParameters
     {
         public int Id { get; set; }
         public string CodeName { get; set; }
