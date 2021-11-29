@@ -25,7 +25,7 @@ namespace BusinessLogic.Logic
 
         public IDto GetById(int id)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();  
         }
     }
 }

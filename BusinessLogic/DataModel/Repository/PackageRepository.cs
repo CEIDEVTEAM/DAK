@@ -39,7 +39,7 @@ namespace BusinessLogic.DataModel.Repository
 
         public void Update(PackageDto dto)
         {
-            Package trann = this.GetById(dto.Id);
+            Package trann = this._Context.Package.FirstOrDefault(x => x.Id == dto.Id);
             trann.Price = dto.Price;
             trann.Paid = dto.Paid;
             this._Context.Package.Attach(trann);
@@ -47,9 +47,9 @@ namespace BusinessLogic.DataModel.Repository
 
         }
 
-        public Package GetById(int id)
+        public PackageDto GetById(int id)
         {
-            return this._Context.Package.FirstOrDefault(x => x.Id == id);
+            return this._PackageMapper.MapToDto(this._Context.Package.FirstOrDefault(x => x.Id == id));
         }
     }
 }

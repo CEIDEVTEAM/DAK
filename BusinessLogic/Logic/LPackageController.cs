@@ -144,6 +144,13 @@ namespace BusinessLogic.Logic
             return dto;
         }
 
+        public PackageDto GetPackageById(int packageId)
+        {
+            using var uow = new UnitOfWork();
+            return uow.PackageRepository.GetById(packageId);
+        }
+
+
         private int? GetClientId(string number)
         {
             int? clientId;
