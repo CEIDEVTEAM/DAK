@@ -10,9 +10,9 @@ namespace ClientApp.Controllers
 {
     public class CashInController : Controller
     {
-        public ActionResult CashIn(PackageDto dto)
+        public ActionResult CashIn()
         {
-            ViewBag.cashPrice = dto.Price;
+            
 
             return View();
         }

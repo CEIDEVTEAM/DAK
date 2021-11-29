@@ -49,7 +49,7 @@ namespace ClientApp.Controllers
             //    ModelState.Clear();
             //}
 
-            return RedirectToAction("CashIn", "CashIn", dto);
+            return Json(dto);
         }
         [HttpGet]
         public JsonResult PopulatePolygons()
