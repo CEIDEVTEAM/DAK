@@ -117,15 +117,17 @@ function addPackage() {
             data: jSon,
             url: 'AddPackage',
             success: function (respuesta) {
-                hideDivMap();
-                document.getElementById("IdClient").value="";
-                document.getElementById("IdRecipient").value = "";
-                document.getElementById("Address").value = "";
-                document.getElementById("Height").value = "";
-                document.getElementById("Width").value = "";
-                document.getElementById("Weight").value = "";
-                document.getElementById("Length").value = "";
-                document.getElementById("selectValue").value = "";
+                var url = "/CashIn/CashIn";
+                window.location.href = url;
+                //hideDivMap();
+                //document.getElementById("IdClient").value="";
+                //document.getElementById("IdRecipient").value = "";
+                //document.getElementById("Address").value = "";
+                //document.getElementById("Height").value = "";
+                //document.getElementById("Width").value = "";
+                //document.getElementById("Weight").value = "";
+                //document.getElementById("Length").value = "";
+                //document.getElementById("selectValue").value = "";
             },
             error: function (respuesta) {
 

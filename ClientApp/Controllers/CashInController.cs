@@ -12,6 +12,8 @@ namespace ClientApp.Controllers
     {
         public ActionResult CashIn()
         {
+            
+
             return View();
         }
 
