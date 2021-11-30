@@ -19,7 +19,7 @@ namespace BusinessLogic.Logic
             IPaymentMethod paymentMethod = new Cash();
             PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
             bool response = context.ProcessPayment((float)dto.Amount);
-            if(response)
+            
 
             return errors;
         }
