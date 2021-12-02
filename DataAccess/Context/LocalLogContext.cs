@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using CommonSolution.Constants;
+using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace DataAccess.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("data source = devteamhost.ddns.net; initial catalog = LocalLogDB; user id = CEIDEVTEAM; password = CeiDev158$48/Team; MultipleActiveResultSets = true; ");
+                optionsBuilder.UseSqlServer(CRoutes.CSTRINGLOCAL);
             }
         }
 

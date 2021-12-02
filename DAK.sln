@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Service", "1. Service", "{AF5D802B-9E58-43FA-9C13-661BD105F9A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business", "2. Business", "{C4C1D724-A15D-46F4-8548-885C4ADD2BF0}"
+	ProjectSection(SolutionItems) = preProject
+		BusinessLogic\Maps\DistanceMatrixClient.cs = BusinessLogic\Maps\DistanceMatrixClient.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Data", "3. Data", "{B381AC75-DD56-4F71-954D-E8BD79CB2796}"
 EndProject

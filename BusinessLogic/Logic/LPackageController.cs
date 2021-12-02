@@ -2,10 +2,13 @@
 using BusinessLogic.Domain.PackageReception;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Valdations.ValidationRules;
+using CommonSolution.Constants;
 using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
 using DataAccess.Models;
+using MOME.GoogleMapDotNetExtension.DisntanceMatrix;
+using MOME.GoogleMapDotNetExtension.DisntanceMatrix.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,6 +135,7 @@ namespace BusinessLogic.Logic
             dto.Paid = false;
             dto.Date = DateTime.Now;
             dto.StatusCode = 1;
+            dto.Distance = this.GetDistance("Madrid", dto.Address);
             if (dto.Type == "LETTER")
             {
                 dto.Weight = 0;
@@ -186,6 +190,18 @@ namespace BusinessLogic.Logic
             }
             return response;
         }
+
+        public int GetDistance(string origin, string destination)
+        {
+            int distance = 0;
+            DistanceMatrixClient disMatrix = new DistanceMatrixClient(CRoutes.APIKEY);
+            DistanceMatrix response = disMatrix.RequestDistance(Unit.Metric, origin, destination);
+            if (response != null)
+                distance = (int)response.Disntance;
+
+            return distance;
+        }
+
     }
 
 

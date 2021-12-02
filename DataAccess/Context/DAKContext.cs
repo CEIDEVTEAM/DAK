@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonSolution.Constants;
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -34,8 +35,8 @@ namespace DataAccess.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("data source = devteamhost.ddns.net; initial catalog = DAK; user id = CEIDEVTEAM; password = CeiDev158$48/Team; MultipleActiveResultSets = true; ");
-                //optionsBuilder.UseSqlServer("data source = localhost; initial catalog = DAK; user id = Carlos; password = 1234; MultipleActiveResultSets = true; ");
+                //optionsBuilder.UseSqlServer(CRoutes.CSTRINGDAK);
+                optionsBuilder.UseSqlServer("data source = localhost; initial catalog = DAK; user id = Carlos; password = 1234; MultipleActiveResultSets = true; ");
             }
         }
 
