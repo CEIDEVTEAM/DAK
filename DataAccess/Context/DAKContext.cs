@@ -35,8 +35,8 @@ namespace DataAccess.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer(CRoutes.CSTRINGDAK);
-                optionsBuilder.UseSqlServer("data source = localhost; initial catalog = DAK; user id = Carlos; password = 1234; MultipleActiveResultSets = true; ");
+                optionsBuilder.UseSqlServer(CRoutes.CSTRINGDAK);
+                //optionsBuilder.UseSqlServer("data source = localhost; initial catalog = DAK; user id = Carlos; password = 1234; MultipleActiveResultSets = true; ");
             }
         }
 
