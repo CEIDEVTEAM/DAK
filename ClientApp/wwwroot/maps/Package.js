@@ -104,12 +104,12 @@ function addPackage() {
     var Weight = document.getElementById("Weight").value;
     var Length = document.getElementById("Length").value;
     var Type = document.getElementById("selectValue").value;
-    var distance = 100;
-    if (dto.id != undefined) {
+    var city = document.getElementById("selectValueCity").value;
+    //if (dto.id != undefined) {
 
         var jSon = {
             IdClient: IdClient, IdRecipient: IdRecipient, Height: Height, Width: Width, Weight: Weight, Length: Length, Type: Type,
-            Latitude: dto.latitud, Longitude: dto.longitud, IdDeliveryArea: dto.id, Distance: distance, Address: Address
+            Latitude: dto.latitud, Longitude: dto.longitud, IdDeliveryArea: dto.id, Address: Address, City:city
         }
 
         $.ajax({
@@ -133,11 +133,11 @@ function addPackage() {
 
             }
         })
-    } else {
+    //} else {
 
-        alert("Debe ingresar la ubicación de Destino.");
+        //alert("Debe ingresar la ubicación de Destino.");
 
-    }
+   // }
 }
 
 function createPoly(coordinates) {

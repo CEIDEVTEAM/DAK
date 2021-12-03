@@ -15,11 +15,13 @@ namespace BusinessLogic.DataModel.Repository
     public class DeliveryAreaRepository
     {
         private DeliveyAreaMapper _DeliveryAreaMapper;
+        private CityMapper _CityMapper;
         private readonly DAKContext _Context;
         public DeliveryAreaRepository(DAKContext context)
         {
 
             this._DeliveryAreaMapper = new DeliveyAreaMapper();
+            this._CityMapper = new CityMapper();
             this._Context = context;
         }
 
@@ -50,6 +52,14 @@ namespace BusinessLogic.DataModel.Repository
             return this._DeliveryAreaMapper.MapToDto(_Context.DeliveryArea.Include("Coordinates").AsNoTracking().ToList());
         }
 
-        
+        public List<CityDto> GetAllCity()
+        {
+            return this._CityMapper.MapToDto(_Context.City.AsNoTracking().ToList());
+        }
+
+        public int GetDeliveryAreaByCity(string city)
+        {
+            return this._Context.City.AsNoTracking().FirstOrDefault(x => x.Name == city).IdDeliveryArea;
+        }
     }
 }

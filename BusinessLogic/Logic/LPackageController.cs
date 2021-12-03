@@ -135,14 +135,14 @@ namespace BusinessLogic.Logic
             dto.Paid = false;
             dto.Date = DateTime.Now;
             dto.StatusCode = 1;
-            dto.Distance = this.GetDistance("Madrid", dto.Address);
+            dto.IdDeliveryArea = this.GetDeliveryAreaByCity(dto.City);
+            dto.Distance = this.GetDistance("Nairobi", dto.City)/1000;
             if (dto.Type == "LETTER")
             {
-                dto.Weight = 0;
+                dto.Weight = 0.100;
                 dto.Width = 0;
                 dto.Length = 0;
                 dto.Height = 0;
-
             }
 
             return dto;
@@ -154,7 +154,12 @@ namespace BusinessLogic.Logic
             return uow.PackageRepository.GetById(packageId);
         }
 
+        private int GetDeliveryAreaByCity(string city)
+        {
+            using var uow = new UnitOfWork();
+            return uow.DeliveryAreaRepository.GetDeliveryAreaByCity(city);
 
+        }
         private int? GetClientId(string number)
         {
             int? clientId;
@@ -162,7 +167,7 @@ namespace BusinessLogic.Logic
             {
                 clientId = uow.FinalClientRepository.GetFinalClientByDoc(number);
                 if (clientId == null)
-                    uow.CompanyRepository.GetCompanyIdByRut(number);
+                    clientId = uow.CompanyRepository.GetCompanyIdByRut(number);
 
             }
             return clientId;

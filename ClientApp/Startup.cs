@@ -26,6 +26,11 @@ namespace ClientApp
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddRazorPages().AddRazorRuntimeCompilation();
 
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+            });
+            services.AddMvc();
 
         }
 
@@ -45,6 +50,8 @@ namespace ClientApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

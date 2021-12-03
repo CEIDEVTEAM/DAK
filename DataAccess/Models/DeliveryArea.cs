@@ -21,5 +21,6 @@ namespace DataAccess.Models
         public virtual Expedition Expedition { get; set; }
         public virtual ICollection<Coordinate> Coordinates { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }

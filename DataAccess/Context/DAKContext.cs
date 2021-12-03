@@ -206,16 +206,6 @@ namespace DataAccess.Context
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
-                entity.Property(e => e.Latitude)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Longitude)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.TrackingNumber)
                     .HasMaxLength(50)
                     .IsUnicode(false);

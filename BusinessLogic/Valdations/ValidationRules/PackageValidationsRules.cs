@@ -25,7 +25,6 @@ namespace BusinessLogic.Valdations.ValidationRules
         {
             this.SenderValidation();
             this.RecipientValidation();
-            this.DistanceValidation();
             if (dto.Type != "LETTER")
             {
                 this.HeigthValidation();
@@ -68,14 +67,7 @@ namespace BusinessLogic.Valdations.ValidationRules
                 this.errors.Add("El Alto debe ser un valor positivo");
         }
 
-        private void DistanceValidation()
-        {
-            int distance = dto.Distance;
-            bool isPositive = new PositiveIntValidationRule().Validate(distance);
-            if (!isPositive)
-                this.errors.Add("La distancia debe ser un valor positivo");
-        }
-
+        
         private void RecipientValidation()
         {
             string sender = this.dto.IdClient;

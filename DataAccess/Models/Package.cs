@@ -21,8 +21,6 @@ namespace DataAccess.Models
         public int IdClient { get; set; }
         public int IdRecipient { get; set; }
         public string Address { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
         public int Distance { get; set; }
         public double? Height { get; set; }
         public double? Width { get; set; }

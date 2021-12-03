@@ -45,6 +45,6 @@ namespace CommonSolution.DTOs
         public int IdZona { get; set; }
         public double? Price{ get; set; }
         public int IdDeliveryArea { get; set; }
-
+        public string City { get; set; }
     }
 }

@@ -40,6 +40,8 @@ namespace ClientApp.Controllers
             return View(colDto);
         }
 
+        
+
         //public ActionResult Delete(int id)
         //{
         //    LZonaController lgc = new LZonaController();

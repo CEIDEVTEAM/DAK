@@ -30,5 +30,18 @@ namespace BusinessLogic.Logic
 
             return dto;
         }
+
+        public List<CityDto> GetAllCities()
+        {
+            List<CityDto> dto = new List<CityDto>();
+            using (var uow = new UnitOfWork())
+            {
+                dto = uow.DeliveryAreaRepository.GetAllCity();
+            }
+
+            return dto;
+        }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Logic;
 using CommonSolution.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,13 @@ namespace ClientApp.Controllers
     {
         public ActionResult CashIn()
         {
-            
+            var idPackage = HttpContext.Session.GetString("44");
+            LPackageController lgc = new LPackageController();
+            PackageDto dto = lgc.GetPackageById(int.Parse(idPackage));
+
+            ViewBag.Price = dto.Price;
+            ViewBag.IdPackage = dto.Id;
+
 
             return View();
         }
@@ -23,5 +30,8 @@ namespace ClientApp.Controllers
             lcc.PaymentProcess(dto);
             return View();
         }
+
+
+
     }
 }

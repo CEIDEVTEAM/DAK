@@ -30,7 +30,8 @@
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
                 <h3>HOME</h3>
-                <p>@ViewBag.cashPrice</p>
+                <p>@ViewBag.Price</p>
+                <a asp-action="Edit" asp-route-id="@ViewBag.IdPackage" class = "btn btn-success" >Edit</a>
                 <input type="button" value="Cobrar" class="btn btn-primary" />
             </div>
             <div id="menu1" class="tab-pane fade">

@@ -17,11 +17,12 @@ namespace ClientApp.Controllers
         // GET: PackageController
         public ActionResult New()
         {
-            
+
             ViewBag.colTypeSelect = GetSelectType();
+            ViewBag.colCities = GetCities();
             return View();
         }
-        
+
         public List<SelectListItem> GetSelectType()
         {
             IEnumerable<PackageTypeEnum> colPackageTypeEnum = Enum.GetValues(typeof(PackageTypeEnum)).Cast<PackageTypeEnum>();
@@ -37,17 +38,30 @@ namespace ClientApp.Controllers
             return TypeList;
         }
 
+        public List<SelectListItem> GetCities()
+        {
+            LDeliveryAreaController lcc = new LDeliveryAreaController();
+            List<CityDto> colDto = lcc.GetAllCities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (CityDto item in colDto)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.Name;
+                option.Text = item.Name;
+                list.Add(option);
+            }
+
+            return list;
+        }
+
         public ActionResult AddPackage(PackageDto dto)
         {
             LPackageController lgc = new LPackageController();
 
             List<string> colErrors = lgc.Add(dto);
 
-            //if (colErrors.Count == 0)
-            //{
-            //    Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
-            //    ModelState.Clear();
-            //}
+            string id = dto.Id.ToString();
+            HttpContext.Session.SetString("44", id);
 
             return Json(dto);
         }
