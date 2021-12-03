@@ -20,6 +20,7 @@ namespace DataAccess.Context
         {
         }
 
+        public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<Coordinate> Coordinate { get; set; }
@@ -67,6 +68,22 @@ namespace DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(15)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.ToTable("City");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdDeliveryAreaNavigation)
+                    .WithMany(p => p.Cities)
+                    .HasForeignKey(d => d.IdDeliveryArea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_City_Area");
             });
 
             modelBuilder.Entity<Company>(entity =>
