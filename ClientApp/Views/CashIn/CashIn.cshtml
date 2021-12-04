@@ -28,14 +28,15 @@
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
                 <div class="col-3">
-                    <form asp-action="ProcessCash">
-
+                    <form asp-action="ProcessPayment">
+                        <input type="hidden" asp-for="PaymentMethod" value="Cash" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label class="control-label">Procesamiento del Paquete nro:</label>
                             <input asp-for="Id" class="form-control" readonly />
 
                         </div>
+
                         <div class="form-group">
                             <label class="control-label">Total a cobrar</label>
                             <input asp-for="Price" class="form-control" readonly />
@@ -50,8 +51,8 @@
             </div>
             <div id="menu1" class="tab-pane fade">
                 <div class="col-3">
-                    <form asp-action="ProcessCredit">
-
+                    <form asp-action="ProcessPayment">
+                        <input type="hidden" asp-for="PaymentMethod" value="Credit" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label class="control-label">Procesamiento del Paquete nro:</label>
@@ -71,8 +72,8 @@
             </div>
             <div id="menu2" class="tab-pane fade">
                 <div class="col-3">
-                    <form asp-action="ProcessDebit">
-
+                    <form asp-action="ProcessPayment">
+                        <input type="hidden" asp-for="PaymentMethod" value="Debit" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label class="control-label">Procesamiento del Paquete nro:</label>
@@ -92,8 +93,8 @@
             </div>
             <div id="menu3" class="tab-pane fade">
                 <div class="col-3">
-                    <form asp-action="ProcessMercadoPago">
-
+                    <form asp-action="ProcessPayment">
+                        <input type="hidden" asp-for="PaymentMethod" value="MercadoPago" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label class="control-label">Procesamiento del Paquete nro:</label>

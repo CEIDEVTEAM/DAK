@@ -42,10 +42,9 @@ namespace CommonSolution.DTOs
         public double? Weight { get; set; }
         public double? Length { get; set; }
         public string Type { get; set; }
-        public int IdZona { get; set; }
-        public double? Price{ get; set; }
+        public double? Price { get; set; }
         public int IdDeliveryArea { get; set; }
-        public string City { get; set; }
+        public int IdCity { get; set; }
         public string PaymentMethod { get; set; }
     }
 }

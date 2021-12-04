@@ -29,30 +29,23 @@ namespace ClientApp.Controllers
             return View(dto);
         }
 
-        public ActionResult ProcessCash(PackageDto dto)
+        public ActionResult ProcessPayment(PackageDto dto)
         {
             LCashInController lcc = new LCashInController();
             lcc.PaymentCashProcess(dto);
+            this.CreateTrackingNumber(dto);
             return RedirectToAction("New", "Package");
         }
-        public ActionResult ProcessDebit(PackageDto dto)
+        
+
+        public void CreateTrackingNumber(PackageDto dto)
         {
-            LCashInController lcc = new LCashInController();
-            lcc.PaymentDebitProcess(dto);
-            return RedirectToAction("New", "Package");
+            LPackageController lgc = new LPackageController();
+            lgc.CreateTrackingNumber(dto);
         }
-        public ActionResult ProcessCredit(PackageDto dto)
-        {
-            LCashInController lcc = new LCashInController();
-            lcc.PaymentCreditProcess(dto);
-            return RedirectToAction("New", "Package");
-        }
-        public ActionResult ProcessMercadoPago(PackageDto dto)
-        {
-            LCashInController lcc = new LCashInController();
-            lcc.PaymentMercadoPagoProcess(dto);
-            return RedirectToAction("New", "Package");
-        }
+
+
+
         public ActionResult CreatePdf(int id)
         {
             LPackageController lgc = new LPackageController();
@@ -106,7 +99,7 @@ namespace ClientApp.Controllers
             Cell cell14 = new Cell(1, 4)
                .SetBackgroundColor(ColorConstants.GRAY)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph("Fecha: " + dto.City));
+               .Add(new Paragraph("Fecha: " + dto.IdCity));
 
             table.AddCell(cell11);
             table.AddCell(cell12);

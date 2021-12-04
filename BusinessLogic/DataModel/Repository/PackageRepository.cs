@@ -42,6 +42,7 @@ namespace BusinessLogic.DataModel.Repository
             Package trann = this._Context.Package.FirstOrDefault(x => x.Id == dto.Id);
             trann.Price = dto.Price;
             trann.Paid = dto.Paid;
+            trann.TrackingNumber = dto.TrackingNumber;
             this._Context.Package.Attach(trann);
             this._Context.Entry(trann).State = EntityState.Modified;
 

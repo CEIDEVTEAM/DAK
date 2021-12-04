@@ -9,6 +9,7 @@ namespace DataAccess.Models
     {
         public DeliveryArea()
         {
+            Cities = new HashSet<City>();
             Coordinates = new HashSet<Coordinate>();
             Packages = new HashSet<Package>();
         }
@@ -19,8 +20,8 @@ namespace DataAccess.Models
         public string Color { get; set; }
 
         public virtual Expedition Expedition { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
         public virtual ICollection<Coordinate> Coordinates { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
-        public virtual ICollection<City> Cities { get; set; }
     }
 }

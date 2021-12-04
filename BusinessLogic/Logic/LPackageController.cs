@@ -77,6 +77,15 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
+        public void CreateTrackingNumber(PackageDto dto)
+        {
+            PackageDto currDto = this.GetPackageById(dto.Id);
+
+            TrackingNumberGenerator tng = new TrackingNumberGenerator(currDto);
+            currDto.TrackingNumber = tng.GenerateTrackingNumber();
+            this.UpdatePackage(currDto);
+        }
+
         private void CalculatePrice(PackageDto dto)
         {
             ClientGroupContext clientContex = new ClientGroupContext();
@@ -135,8 +144,9 @@ namespace BusinessLogic.Logic
             dto.Paid = false;
             dto.Date = DateTime.Now;
             dto.StatusCode = 1;
-            dto.IdDeliveryArea = this.GetDeliveryAreaByCity(dto.City);
-            dto.Distance = this.GetDistance("Nairobi", dto.City)/1000;
+            dto.IdDeliveryArea = this.GetDeliveryAreaByCity(dto.IdCity);
+            string city = this.GetCityById(dto.IdCity);
+            dto.Distance = this.GetDistance("Nairobi", city)/1000;
             if (dto.Type == "LETTER"||dto.Type == null)
             {
                 dto.Weight = 0.100;
@@ -154,10 +164,10 @@ namespace BusinessLogic.Logic
             return uow.PackageRepository.GetById(packageId);
         }
 
-        private int GetDeliveryAreaByCity(string city)
+        private int GetDeliveryAreaByCity(int idCity)
         {
             using var uow = new UnitOfWork();
-            return uow.DeliveryAreaRepository.GetDeliveryAreaByCity(city);
+            return uow.DeliveryAreaRepository.GetDeliveryAreaById(idCity);
 
         }
         private int? GetClientId(string number)
@@ -205,6 +215,16 @@ namespace BusinessLogic.Logic
                 distance = (int)response.Disntance;
 
             return distance;
+        }
+
+        public string GetCityById(int idCity)
+        {
+            string city;
+            using (var uow = new UnitOfWork())
+            {
+                city = uow.DeliveryAreaRepository.GetCityById(idCity);
+            }
+            return city;
         }
 
     }

@@ -53,7 +53,7 @@ namespace ClientApp.Controllers
             foreach (CityDto item in colDto)
             {
                 SelectListItem option = new SelectListItem();
-                option.Value = item.Name;
+                option.Value = item.Id.ToString();
                 option.Text = item.Name;
                 list.Add(option);
             }

@@ -56,10 +56,14 @@ namespace BusinessLogic.DataModel.Repository
         {
             return this._CityMapper.MapToDto(_Context.City.AsNoTracking().ToList());
         }
-
-        public int GetDeliveryAreaByCity(string city)
+        public string GetCityById(int idCity)
         {
-            return this._Context.City.AsNoTracking().FirstOrDefault(x => x.Name == city).IdDeliveryArea;
+            return this._Context.City.AsNoTracking().FirstOrDefault(x => x.Id == idCity).Name;
+        }
+
+        public int GetDeliveryAreaById(int idCity)
+        {
+            return this._Context.City.AsNoTracking().FirstOrDefault(x => x.Id == idCity).IdDeliveryArea;
         }
     }
 }

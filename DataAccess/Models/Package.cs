@@ -28,7 +28,10 @@ namespace DataAccess.Models
         public double? Length { get; set; }
         public int? IdDeliveryArea { get; set; }
         public double? Price { get; set; }
+        public int? IdCity { get; set; }
+        
 
+        public virtual City IdCityNavigation { get; set; }
         public virtual Client IdClientNavigation { get; set; }
         public virtual DeliveryArea IdDeliveryAreaNavigation { get; set; }
         public virtual Client IdRecipientNavigation { get; set; }

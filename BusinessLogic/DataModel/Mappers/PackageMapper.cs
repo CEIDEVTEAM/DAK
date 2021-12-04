@@ -33,7 +33,9 @@ namespace BusinessLogic.DataModel.Mappers
                 Length = dto.Length,
                 Width = dto.Width,
                 Price = dto.Price,
-                IdDeliveryArea = dto.IdDeliveryArea
+                IdCity = dto.IdCity,
+                IdDeliveryArea = dto.IdDeliveryArea,
+                
             };
         }
 
@@ -58,6 +60,7 @@ namespace BusinessLogic.DataModel.Mappers
                 Length = package.Length,
                 Width = package.Width,
                 Price = package.Price,
+                IdCity = (int)package.IdCity,
                 IdDeliveryArea = (int)package.IdDeliveryArea,
                 Id = package.Id
             };

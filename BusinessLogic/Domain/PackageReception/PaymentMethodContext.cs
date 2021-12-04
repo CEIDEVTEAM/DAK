@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Domain.PackageReception.PaymentMethodStrategies;
+using BusinessLogic.Interfaces;
+using CommonSolution.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,10 @@ namespace BusinessLogic.Domain.PackageReception
     public class PaymentMethodContext
     {
         private IPaymentMethod paymentMethod;
+
+        public PaymentMethodContext()
+        {
+        }
 
         public PaymentMethodContext(IPaymentMethod _paymentMethod)
         {
@@ -24,6 +30,32 @@ namespace BusinessLogic.Domain.PackageReception
                 processed = this.paymentMethod.ProcessPayment(amount);
 
             return processed;
+        }
+
+        internal void SetStrategy(string paymentMethod)
+        {
+            IPaymentMethod strategy;
+
+            switch (paymentMethod)
+            {
+                case CPaymentMethod.CASH:
+                    strategy = new Cash();
+                    break;
+                case CPaymentMethod.CREDIT:
+                    strategy = new CreditCard();
+                    break;
+                case CPaymentMethod.DEBIT:
+                    strategy = new DebitCard();
+                    break;
+                case CPaymentMethod.MERCADO_PAGO:
+                    strategy = new MercadoPago();
+                    break;
+                default:
+                    strategy = new Cash();
+                    break;
+            }
+
+            this.paymentMethod = strategy;
         }
     }
 }

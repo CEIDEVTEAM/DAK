@@ -17,16 +17,17 @@ namespace BusinessLogic.Logic
         public List<string> PaymentCashProcess(PackageDto dto)
         {
             List<string> errors = new List<string>();
-            IPaymentMethod paymentMethod = new Cash();
-            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
+            string paymentMethod = dto.PaymentMethod;
+            PaymentMethodContext context = new PaymentMethodContext();
+            context.SetStrategy(paymentMethod);
             bool response = context.ProcessPayment((float)dto.Price);
             if (response)
             {
                 LPackageController lpc = new LPackageController();
-                PackageDto packageDto = lpc.GetPackageById(dto.Id);
-                packageDto.Paid = true;
-                lpc.UpdatePackage(packageDto);
-                dto.PaymentMethod = "Cash";
+                dto = lpc.GetPackageById(dto.Id);
+                dto.Paid = true;
+                dto.PaymentMethod = paymentMethod;
+                lpc.UpdatePackage(dto);
                 this.Add(dto);
 
             }

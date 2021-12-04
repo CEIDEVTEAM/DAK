@@ -45,6 +45,22 @@ namespace DataAccess.Context
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.ToTable("City");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdDeliveryAreaNavigation)
+                    .WithMany(p => p.Cities)
+                    .HasForeignKey(d => d.IdDeliveryArea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_City_Area");
+            });
+
             modelBuilder.Entity<Client>(entity =>
             {
                 entity.ToTable("Client");
@@ -68,22 +84,6 @@ namespace DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(15)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<City>(entity =>
-            {
-                entity.ToTable("City");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.IdDeliveryAreaNavigation)
-                    .WithMany(p => p.Cities)
-                    .HasForeignKey(d => d.IdDeliveryArea)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_City_Area");
             });
 
             modelBuilder.Entity<Company>(entity =>
@@ -210,6 +210,11 @@ namespace DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.IdCityNavigation)
+                    .WithMany(p => p.Packages)
+                    .HasForeignKey(d => d.IdCity)
+                    .HasConstraintName("FK_Package_City");
+
                 entity.HasOne(d => d.IdClientNavigation)
                     .WithMany(p => p.PackageIdClientNavigations)
                     .HasForeignKey(d => d.IdClient)
@@ -267,13 +272,9 @@ namespace DataAccess.Context
 
             modelBuilder.Entity<PaymentRecord>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
                 entity.ToTable("PaymentRecord");
 
                 entity.Property(e => e.Date).HasColumnType("date");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.PaymentMethod)
                     .IsRequired()

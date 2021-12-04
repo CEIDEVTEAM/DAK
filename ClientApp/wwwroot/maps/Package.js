@@ -112,7 +112,7 @@ function addPackage() {
     if (check) {
         var jSon = {
             IdClient: IdClient, IdRecipient: IdRecipient, Height: Height, Width: Width, Weight: Weight, Length: Length, Type: Type,
-            Latitude: dto.latitud, Longitude: dto.longitud, IdDeliveryArea: dto.id, Address: Address, City:city
+            Latitude: dto.latitud, Longitude: dto.longitud, IdDeliveryArea: dto.id, Address: Address, IdCity:city
         }
 
         $.ajax({
