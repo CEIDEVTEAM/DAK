@@ -116,10 +116,8 @@ namespace ClientApp.Controllers
             document.Add(newline);
             document.Add(table);
 
-            //Paragraph paragraph2 = new Paragraph("OBSERVACIÓN CIUDADANO: " + dto.observaciones);
-            //document.Add(paragraph2);
-
-
+            Paragraph paragraph2 = new Paragraph("OBSERVACIÓN CIUDADANO: " + dto.IdRecipient);
+            document.Add(paragraph2);
 
             document.Add(newline);
 
