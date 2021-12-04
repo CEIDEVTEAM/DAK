@@ -105,8 +105,11 @@ function addPackage() {
     var Length = document.getElementById("Length").value;
     var Type = document.getElementById("selectValue").value;
     var city = document.getElementById("selectValueCity").value;
-    //if (dto.id != undefined) {
 
+    var mandatoryInputs = {
+        IdClient: IdClient, IdRecipient: IdRecipient, Address: Address, City: city, Type: Type}
+    var check = validateInputs(mandatoryInputs);
+    if (check) {
         var jSon = {
             IdClient: IdClient, IdRecipient: IdRecipient, Height: Height, Width: Width, Weight: Weight, Length: Length, Type: Type,
             Latitude: dto.latitud, Longitude: dto.longitud, IdDeliveryArea: dto.id, Address: Address, City:city
@@ -119,25 +122,25 @@ function addPackage() {
             success: function (respuesta) {
                 var url = "/CashIn/CashIn";
                 window.location.href = url;
-                //hideDivMap();
-                //document.getElementById("IdClient").value="";
-                //document.getElementById("IdRecipient").value = "";
-                //document.getElementById("Address").value = "";
-                //document.getElementById("Height").value = "";
-                //document.getElementById("Width").value = "";
-                //document.getElementById("Weight").value = "";
-                //document.getElementById("Length").value = "";
-                //document.getElementById("selectValue").value = "";
+                
             },
             error: function (respuesta) {
 
             }
         })
-    //} else {
+    } else {
 
-        //alert("Debe ingresar la ubicación de Destino.");
+        alert("Debe completar todos los campos.");
 
-   // }
+    }
+}
+function validateInputs(inputs) {
+
+    for (var input in inputs) {
+        if (inputs[input] == null || inputs[input] == "")
+            return false;
+    }
+    return true;
 }
 
 function createPoly(coordinates) {

@@ -2,11 +2,18 @@
 using BusinessLogic.Logic;
 using CommonSolution.DTOs;
 using CommonSolution.ENUMs;
+using iText.Kernel.Colors;
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Draw;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -81,6 +88,8 @@ namespace ClientApp.Controllers
             List<PackageDto> dto = lgc.GetAll();
             return Json(new { data = dto });
         }
+
+        
 
 
         public JsonResult ValidateRemitent(string IdClient)

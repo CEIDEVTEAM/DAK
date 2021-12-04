@@ -26,7 +26,7 @@ namespace BusinessLogic.Domain.PackageReception.PaymentMethodStrategies
             using var reader = new StreamReader(webStream);
             var data = reader.ReadToEnd();
 
-            if (!string.IsNullOrEmpty(data) && data == "/true/")
+            if (!string.IsNullOrEmpty(data) && data == "true")
                 resp = true;
 
             return resp;

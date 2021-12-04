@@ -58,7 +58,8 @@ namespace BusinessLogic.DataModel.Mappers
                 Length = package.Length,
                 Width = package.Width,
                 Price = package.Price,
-                IdDeliveryArea = (int)package.IdDeliveryArea
+                IdDeliveryArea = (int)package.IdDeliveryArea,
+                Id = package.Id
             };
         }
 

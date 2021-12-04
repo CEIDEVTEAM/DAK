@@ -14,18 +14,19 @@ namespace BusinessLogic.Logic
 {
     public class LCashInController
     {
-        public List<string> PaymentProcess(PaymentRecordDto dto)
+        public List<string> PaymentCashProcess(PackageDto dto)
         {
             List<string> errors = new List<string>();
             IPaymentMethod paymentMethod = new Cash();
             PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
-            bool response = context.ProcessPayment((float)dto.Amount);
+            bool response = context.ProcessPayment((float)dto.Price);
             if (response)
             {
                 LPackageController lpc = new LPackageController();
-                PackageDto packageDto = lpc.GetPackageById(dto.PackageId);
+                PackageDto packageDto = lpc.GetPackageById(dto.Id);
                 packageDto.Paid = true;
-
+                lpc.UpdatePackage(packageDto);
+                dto.PaymentMethod = "Cash";
                 this.Add(dto);
 
             }
@@ -33,14 +34,83 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
-        public List<string> Add(PaymentRecordDto dto)
+        public List<string> PaymentDebitProcess(PackageDto dto)
         {
             List<string> errors = new List<string>();
-            using (var uow = new UnitOfWork())
+            IPaymentMethod paymentMethod = new DebitCard();
+            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
+            bool response = context.ProcessPayment((float)dto.Price);
+            if (response)
             {
-                if (errors.Count == 0)
-                    uow.PaymentRecordRepository.Add(dto);
+                LPackageController lpc = new LPackageController();
+                PackageDto packageDto = lpc.GetPackageById(dto.Id);
+                packageDto.Paid = true;
+                lpc.UpdatePackage(packageDto);
+                dto.PaymentMethod = "Debit";
+                this.Add(dto);
+
             }
+
+            return errors;
+        }
+        public List<string> PaymentCreditProcess(PackageDto dto)
+        {
+            List<string> errors = new List<string>();
+            IPaymentMethod paymentMethod = new CreditCard();
+            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
+            bool response = context.ProcessPayment((float)dto.Price);
+            if (response)
+            {
+                LPackageController lpc = new LPackageController();
+                PackageDto packageDto = lpc.GetPackageById(dto.Id);
+                packageDto.Paid = true;
+                lpc.UpdatePackage(packageDto);
+                dto.PaymentMethod = "Credit";
+                this.Add(dto);
+
+            }
+
+            return errors;
+        }
+        public List<string> PaymentMercadoPagoProcess(PackageDto dto)
+        {
+            List<string> errors = new List<string>();
+            IPaymentMethod paymentMethod = new MercadoPago();
+            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
+            bool response = context.ProcessPayment((float)dto.Price);
+            if (response)
+            {
+                LPackageController lpc = new LPackageController();
+                PackageDto packageDto = lpc.GetPackageById(dto.Id);
+                packageDto.Paid = true;
+                lpc.UpdatePackage(packageDto);
+                dto.PaymentMethod = "Mercado Pago";
+                this.Add(dto);
+
+            }
+
+            return errors;
+        }
+        public List<string> Add(PackageDto dto)
+        {
+            List<string> errors = new List<string>();
+            PaymentRecordDto payRecordDto = new PaymentRecordDto();
+            if (dto != null)
+            {
+                payRecordDto.PackageId = dto.Id;
+                payRecordDto.Amount = (double)dto.Price;
+                payRecordDto.PaymentMethod = dto.PaymentMethod;
+                payRecordDto.Date = DateTime.Now;
+                using (var uow = new UnitOfWork())
+                {
+                    if (errors.Count == 0)
+                        uow.PaymentRecordRepository.Add(payRecordDto);
+                }
+            }
+            else {
+                errors.Add("Faltan datos para procesar el pago");
+            }
+            
             return errors;
         }
     }

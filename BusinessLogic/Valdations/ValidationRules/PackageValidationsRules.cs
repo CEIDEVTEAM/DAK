@@ -25,7 +25,7 @@ namespace BusinessLogic.Valdations.ValidationRules
         {
             this.SenderValidation();
             this.RecipientValidation();
-            if (dto.Type != "LETTER")
+            if (dto.Type == "PACKAGE")
             {
                 this.HeigthValidation();
                 this.WidthValidation();

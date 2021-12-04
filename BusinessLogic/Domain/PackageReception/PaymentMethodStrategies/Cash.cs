@@ -11,7 +11,7 @@ namespace BusinessLogic.Domain.PackageReception.PaymentMethodStrategies
     {
         public bool ProcessPayment(float amount)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

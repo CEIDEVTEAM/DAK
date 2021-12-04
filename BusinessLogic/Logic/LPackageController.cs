@@ -137,12 +137,12 @@ namespace BusinessLogic.Logic
             dto.StatusCode = 1;
             dto.IdDeliveryArea = this.GetDeliveryAreaByCity(dto.City);
             dto.Distance = this.GetDistance("Nairobi", dto.City)/1000;
-            if (dto.Type == "LETTER")
+            if (dto.Type == "LETTER"||dto.Type == null)
             {
                 dto.Weight = 0.100;
-                dto.Width = 0;
-                dto.Length = 0;
-                dto.Height = 0;
+                dto.Width = 0.1;
+                dto.Length = 0.1;
+                dto.Height = 0.1;
             }
 
             return dto;

@@ -267,7 +267,7 @@ namespace DataAccess.Context
 
             modelBuilder.Entity<PaymentRecord>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.ToTable("PaymentRecord");
 

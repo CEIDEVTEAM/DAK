@@ -1,24 +1,22 @@
-﻿
+﻿@model CommonSolution.DTOs.PackageDto
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Nuevo Cliente</h1>
-                    <h4 class="m-0 text-dark">Empresa</h4>
+                    <h4 class="m-0 text-dark">Procesamiento de Pago</h4>
                 </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <div class="container">
-        <h2>Dynamic Tabs</h2>
-        <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+    <div class="content" style="margin-left:25px">
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">Efectivo</a></li>
@@ -29,26 +27,95 @@
 
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
-                <h3>HOME</h3>
+                <div class="col-3">
+                    <form asp-action="ProcessCash">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Procesamiento del Paquete nro:</label>
+                            <input asp-for="Id" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Total a cobrar</label>
+                            <input asp-for="Price" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cobrar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
                 <p>@ViewBag.Price</p>
-                <a asp-action="Edit" asp-route-id="@ViewBag.IdPackage" class = "btn btn-success" >Edit</a>
-                <input type="button" value="Cobrar" class="btn btn-primary" />
+                    <a asp-action="CreatePdf" asp-route-id="Id" class="btn btn-success">Imprimir Etiqueta</a>
+                    <input type="button" value="Cobrar" class="btn btn-primary" />
             </div>
             <div id="menu1" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <input type="button" value="Cobrar" class="btn btn-primary" />
+                <div class="col-3">
+                    <form asp-action="ProcessCredit">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Procesamiento del Paquete nro:</label>
+                            <input asp-for="Id" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Total a cobrar</label>
+                            <input asp-for="Price" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cobrar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
             <div id="menu2" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                <input type="button" value="Cobrar" class="btn btn-primary " />
+                <div class="col-3">
+                    <form asp-action="ProcessDebit">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Procesamiento del Paquete nro:</label>
+                            <input asp-for="Id" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Total a cobrar</label>
+                            <input asp-for="Price" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cobrar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
             <div id="menu3" class="tab-pane fade">
-                <h3>Menu 3</h3>
-                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                <input type="button" value="Cobrar" class="btn btn-primary" />
+                <div class="col-3">
+                    <form asp-action="ProcessMercadoPago">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Procesamiento del Paquete nro:</label>
+                            <input asp-for="Id" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Total a cobrar</label>
+                            <input asp-for="Price" class="form-control" readonly />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cobrar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

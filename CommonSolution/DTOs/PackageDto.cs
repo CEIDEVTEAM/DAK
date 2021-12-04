@@ -46,5 +46,6 @@ namespace CommonSolution.DTOs
         public double? Price{ get; set; }
         public int IdDeliveryArea { get; set; }
         public string City { get; set; }
+        public string PaymentMethod { get; set; }
     }
 }
