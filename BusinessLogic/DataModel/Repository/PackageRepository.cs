@@ -35,7 +35,7 @@ namespace BusinessLogic.DataModel.Repository
 
         public List<IDto> GetAll()
         {
-            return this._PackageMapper.MapToDto(this._Context.Package.AsNoTracking().ToList());
+            return this._PackageMapper.MapToDto(this._Context.Package.AsNoTracking().Where(x=>x.StatusCode!=CPackageStatusCode.DELIVERED).ToList());
         }
 
         public void Update(PackageDto dto)
