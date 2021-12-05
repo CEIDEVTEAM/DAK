@@ -1,6 +1,4 @@
-﻿
-
-//nuevo paquete
+﻿//nuevo paquete
 function addPackage() {
 
     var IdClient = document.getElementById("IdClient").value;
@@ -50,3 +48,14 @@ function validateInputs(inputs) {
     return true;
 }
 
+
+function hideDivDimensions(value) {
+    var x = document.getElementById("dimensions");
+    if (value == "PACKAGE") {
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+    } else {
+        x.style.display = "none";
+    }
+}
