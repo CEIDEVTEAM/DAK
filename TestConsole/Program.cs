@@ -14,7 +14,7 @@ namespace TestConsole
         {
             UnitOfWork lcc = new UnitOfWork();
 
-            List<Client> testList = lcc.FinalClientRepository.GetAllClient();
+            List<FinalClient> testList = lcc.FinalClientRepository.GetAllClient();
 
             
         }

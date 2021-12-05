@@ -11,6 +11,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">Nuevo Cliente</h1>
+                    <hr />
                     <h4 class="m-0 text-dark">Cliente Final</h4>
                 </div>
             </div><!-- /.row -->
@@ -21,10 +22,10 @@
     <div class="content" style="margin-left:25px">
         <div class="row">
             <div class="col-md-4">
-                <div class="col-md-10">
+                @*<div class="col-md-10">
                     @Html.RadioButtonFor(model => model.BillingType, "Empresa", new { id = "radioEM" }) Empresa
                     @Html.RadioButtonFor(model => model.BillingType, "ClienteFinal", new { id = "radioCF" }) Cliente Final
-                </div>
+                </div>*@
                 <div id="CF" style="display: block;">
                         <form asp-action="AddFinalClient" asp-controller="Client" method="post" enctype="multipart/form-data">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>

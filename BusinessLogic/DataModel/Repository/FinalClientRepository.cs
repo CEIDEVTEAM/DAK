@@ -43,9 +43,9 @@ namespace BusinessLogic.DataModel.Repository
             return this._FinalClientMapper.MapToDto(this._Context.FinalClient.Include("Client").AsNoTracking().ToList());
         }
 
-        public List<Client> GetAllClient()
+        public List<FinalClient> GetAllClient()
         {
-            return this._Context.Client.Include("FinalClient").AsNoTracking().ToList();
+            return this._Context.FinalClient.Include("IdClientNavigation").AsNoTracking().ToList();
         }
 
         public IDto GetById(int id)
