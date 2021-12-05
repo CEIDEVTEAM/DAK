@@ -25,22 +25,32 @@ namespace BusinessLogic.DataModel.Mappers
             };
         }
 
-        public FinalClientDto MapToDto(Client entity)
+        public IDto MapToDto(FinalClient entity)
         {
             if (entity == null)
                 return null;
 
             return new FinalClientDto
             {
-                Id = entity.Id,
-                BillingType = entity.BillingType,
-                PhoneNumber = entity.PhoneNumber,
-                Address = entity.Address,
-                EMail = entity.Email,
-                DocumentNumber = entity.FinalClient?.DocumentNumber,
-                Name = entity.FinalClient?.Name,
-                LastName = entity.FinalClient?.LastName
+                Id = entity.IdClientNavigation.Id,
+                BillingType = entity.IdClientNavigation.BillingType,
+                PhoneNumber = entity.IdClientNavigation.PhoneNumber,
+                Address = entity.IdClientNavigation.Address,
+                EMail = entity.IdClientNavigation.Email,
+                DocumentNumber = entity.DocumentNumber,
+                Name = entity.Name,
+                LastName = entity.LastName
             };
+        }
+
+        public List<IDto> MapToDto(List<FinalClient> finalClients)
+        {
+            List<IDto> dtos = new List<IDto>();
+            foreach (var item in finalClients)
+            {
+                dtos.Add(this.MapToDto(item));
+            }
+            return dtos;        
         }
 
     }

@@ -24,10 +24,10 @@ namespace BusinessLogic.Logic
             if (response)
             {
                 LPackageController lpc = new LPackageController();
-                dto = lpc.GetPackageById(dto.Id);
+                dto = (PackageDto)lpc.GetById(dto.Id);
                 dto.Paid = true;
                 dto.PaymentMethod = paymentMethod;
-                lpc.UpdatePackage(dto);
+                lpc.Update(dto);
                 this.Add(dto);
 
             }
@@ -35,63 +35,6 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
-        public List<string> PaymentDebitProcess(PackageDto dto)
-        {
-            List<string> errors = new List<string>();
-            IPaymentMethod paymentMethod = new DebitCard();
-            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
-            bool response = context.ProcessPayment((float)dto.Price);
-            if (response)
-            {
-                LPackageController lpc = new LPackageController();
-                PackageDto packageDto = lpc.GetPackageById(dto.Id);
-                packageDto.Paid = true;
-                lpc.UpdatePackage(packageDto);
-                dto.PaymentMethod = "Debit";
-                this.Add(dto);
-
-            }
-
-            return errors;
-        }
-        public List<string> PaymentCreditProcess(PackageDto dto)
-        {
-            List<string> errors = new List<string>();
-            IPaymentMethod paymentMethod = new CreditCard();
-            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
-            bool response = context.ProcessPayment((float)dto.Price);
-            if (response)
-            {
-                LPackageController lpc = new LPackageController();
-                PackageDto packageDto = lpc.GetPackageById(dto.Id);
-                packageDto.Paid = true;
-                lpc.UpdatePackage(packageDto);
-                dto.PaymentMethod = "Credit";
-                this.Add(dto);
-
-            }
-
-            return errors;
-        }
-        public List<string> PaymentMercadoPagoProcess(PackageDto dto)
-        {
-            List<string> errors = new List<string>();
-            IPaymentMethod paymentMethod = new MercadoPago();
-            PaymentMethodContext context = new PaymentMethodContext(paymentMethod);
-            bool response = context.ProcessPayment((float)dto.Price);
-            if (response)
-            {
-                LPackageController lpc = new LPackageController();
-                PackageDto packageDto = lpc.GetPackageById(dto.Id);
-                packageDto.Paid = true;
-                lpc.UpdatePackage(packageDto);
-                dto.PaymentMethod = "Mercado Pago";
-                this.Add(dto);
-
-            }
-
-            return errors;
-        }
         public List<string> Add(PackageDto dto)
         {
             List<string> errors = new List<string>();

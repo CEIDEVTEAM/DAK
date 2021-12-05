@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Logic
 {
-    public class LCompanyController : IController
+    public class LCompanyController : IControllerBase
     {
         public List<string> Add(IDto dto)
         {

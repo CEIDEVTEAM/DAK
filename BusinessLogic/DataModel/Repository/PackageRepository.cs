@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using BusinessLogic.DataModel.Mappers;
 using CommonSolution.Interfaces;
 using DataAccess.Models;
+using CommonSolution.Constants;
 
 namespace BusinessLogic.DataModel.Repository
 {
@@ -32,7 +33,7 @@ namespace BusinessLogic.DataModel.Repository
             dto.Id = packageEntity.Id;
         }
 
-        public List<PackageDto> GetAll()
+        public List<IDto> GetAll()
         {
             return this._PackageMapper.MapToDto(this._Context.Package.AsNoTracking().ToList());
         }
@@ -43,6 +44,7 @@ namespace BusinessLogic.DataModel.Repository
             trann.Price = dto.Price;
             trann.Paid = dto.Paid;
             trann.TrackingNumber = dto.TrackingNumber;
+            trann.StatusCode = dto.StatusCode;
             this._Context.Package.Attach(trann);
             this._Context.Entry(trann).State = EntityState.Modified;
 
@@ -52,5 +54,16 @@ namespace BusinessLogic.DataModel.Repository
         {
             return this._PackageMapper.MapToDto(this._Context.Package.FirstOrDefault(x => x.Id == id));
         }
+
+        public bool AnyPackageByTrackingNumber(string trackingNumber)
+        {
+            return this._Context.Package.Any(x => x.TrackingNumber == trackingNumber);
+        }
+
+        public PackageDto GetByTrackingNuber(string trackingNumber)
+        {
+            return this._PackageMapper.MapToDto(this._Context.Package.FirstOrDefault(x => x.TrackingNumber == trackingNumber));
+        }
+
     }
 }

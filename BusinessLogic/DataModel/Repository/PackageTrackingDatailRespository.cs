@@ -1,7 +1,9 @@
 ﻿using BusinessLogic.DataModel.Mappers;
+using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
 using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,14 @@ namespace BusinessLogic.DataModel.Repository
         {
             PackageTrackingDetail packageEntity = this._PackageTrackingDatailMapper.MapToEntity(dto);
             _Context.PackageTrackingDetail.Add(packageEntity);
+        }
+
+
+        public List<PackageTrackingDatailDto> GetTrackingByPackageId(int id)
+        {
+            List<PackageTrackingDatailDto> listDto = new List<PackageTrackingDatailDto>();
+            listDto = this._PackageTrackingDatailMapper.MapToDto(this._Context.PackageTrackingDetail.AsNoTracking().Where(x => x.IdPackage == id).ToList());
+            return listDto;
         }
     }
 }

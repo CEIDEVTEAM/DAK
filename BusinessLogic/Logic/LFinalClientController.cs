@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BusinessLogic.Logic
 {
-    public class LFinalClientController : IController
+    public class LFinalClientController : ICrudController
     {
         public List<string> Add(IDto dto)
         {
@@ -20,7 +20,7 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
-        public List<FinalClientDto> GetAll()
+        public List<IDto> GetAll()
         {
             using (var uow = new UnitOfWork())
             {
@@ -39,6 +39,11 @@ namespace BusinessLogic.Logic
             return dto;
         }
 
+        public List<string> Update(IDto dto)
+        {
+            throw new System.NotImplementedException();
+        }
+
         //
         //VER SI VAMOS A VALIDAR MSIMO EN EL CONTROLLER O EN OTRA CLASE
         //QUE VALIDACIONES VAMOS A TENER ?? SOLO DE TIPOS DE DATO?
@@ -50,5 +55,7 @@ namespace BusinessLogic.Logic
 
             return errors;
         }
+
+       
     }
 }

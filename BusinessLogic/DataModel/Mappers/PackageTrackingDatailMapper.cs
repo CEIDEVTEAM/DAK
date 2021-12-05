@@ -37,10 +37,20 @@ namespace BusinessLogic.DataModel.Mappers
             {
                 DateTime = entity.DateTime,
                 IdPackage = entity.IdPackage,
-                Id = entity.IdPackage,
+                Id = entity.Id,
                 Ubication = entity.Ubication,
                 StatusCode = entity.StatusCode
             };
+        }
+
+        public List<PackageTrackingDatailDto> MapToDto(List<PackageTrackingDetail> listEntity)
+        {
+            List<PackageTrackingDatailDto> list = new List<PackageTrackingDatailDto>();
+            foreach (var item in listEntity)
+            {
+                list.Add(this.MapToDto(item));
+            }
+            return list;
         }
     }
 }

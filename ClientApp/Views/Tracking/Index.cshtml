@@ -1,0 +1,48 @@
+﻿@model CommonSolution.DTOs.TrackingDto
+
+@{
+    ViewData["Title"] = "Tracking Interno";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Tracking Interno</h1>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content" style="margin-left:25px">
+        <div class="row">
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group">
+                        <label asp-for="trackingNumber" class="control-label"></label>
+                        <input asp-for="trackingNumber" class="form-control" />
+                        <span asp-validation-for="trackingNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Ingresar" onclick="getTrackingRequest()" class="btn btn-primary float-right" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div id="trackingParcial"></div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="~/js/InternalTracking.js"></script>
+

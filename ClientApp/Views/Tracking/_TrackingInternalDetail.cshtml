@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CommonSolution.DTOs.PackageTrackingDatailDto>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPackage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ubication)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusCode)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPackage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ubication)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusCode)
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

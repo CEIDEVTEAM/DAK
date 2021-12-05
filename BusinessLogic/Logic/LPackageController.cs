@@ -17,11 +17,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Logic
 {
-    public class LPackageController
+    public class LPackageController : ICrudController
     {
-        public List<string> Add(IDto Idto)
+        public List<string> Add(IDto idto)
         {
-            PackageDto dto = (PackageDto)Idto;
+            PackageDto dto = (PackageDto)idto;
 
             List<string> errors = ValidatePackage(dto);
 
@@ -34,7 +34,8 @@ namespace BusinessLogic.Logic
                     {
                         dto = this.PackageMapping(dto);
                         uow.PackageRepository.Add(dto);
-                        uow.PackageTrackingDatailRespository.Add(this.TrackingDetailMapping(dto.Id));
+                        PackageTrackingDatailDto detailDto = this.TrackingDetailMapping(dto.Id);
+                        uow.PackageTrackingDatailRespository.Add(detailDto);
                         uow.SaveChanges();
                         uow.Commit();
                         this.CalculatePrice(dto);
@@ -50,9 +51,9 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
-        public List<string> UpdatePackage(PackageDto dto)
+        public List<string> Update(IDto iDto)
         {
-
+            PackageDto dto = (PackageDto)iDto;
             List<string> errors = ValidatePackage(dto);
 
             if (errors.Count == 0)
@@ -63,7 +64,6 @@ namespace BusinessLogic.Logic
                     try
                     {
                         uow.PackageRepository.Update(dto);
-
                         uow.SaveChanges();
                         uow.Commit();
                     }
@@ -79,11 +79,11 @@ namespace BusinessLogic.Logic
 
         public void CreateTrackingNumber(PackageDto dto)
         {
-            PackageDto currDto = this.GetPackageById(dto.Id);
+            PackageDto currDto = (PackageDto)this.GetById(dto.Id);
 
             TrackingNumberGenerator tng = new TrackingNumberGenerator(currDto);
             currDto.TrackingNumber = tng.GenerateTrackingNumber();
-            this.UpdatePackage(currDto);
+            this.Update(currDto);
         }
 
         private void CalculatePrice(PackageDto dto)
@@ -95,13 +95,13 @@ namespace BusinessLogic.Logic
                 clientContex.SetStrategy(clientType);
                 dto.Price = clientContex.CalculatePrice(dto);
 
-                this.UpdatePackage(dto);
+                this.Update(dto);
             }
         }
 
-        public List<PackageDto> GetAll()
+        public List<IDto> GetAll()
         {
-            List<PackageDto> dto;
+            List<IDto> dto;
             using (var uow = new UnitOfWork())
             {
                 dto = uow.PackageRepository.GetAll();
@@ -146,8 +146,8 @@ namespace BusinessLogic.Logic
             dto.StatusCode = 1;
             dto.IdDeliveryArea = this.GetDeliveryAreaByCity(dto.IdCity);
             string city = this.GetCityById(dto.IdCity);
-            dto.Distance = this.GetDistance("Nairobi", city)/1000;
-            if (dto.Type == "LETTER"||dto.Type == null)
+            dto.Distance = this.GetDistance("Nairobi", city) / 1000;
+            if (dto.Type == "LETTER" || dto.Type == null)
             {
                 dto.Weight = 0.100;
                 dto.Width = 0.1;
@@ -158,7 +158,7 @@ namespace BusinessLogic.Logic
             return dto;
         }
 
-        public PackageDto GetPackageById(int packageId)
+        public IDto GetById(int packageId)
         {
             using var uow = new UnitOfWork();
             return uow.PackageRepository.GetById(packageId);

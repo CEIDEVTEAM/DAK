@@ -3,10 +3,12 @@ using CommonSolution.DTOs;
 using CommonSolution.Interfaces;
 using DataAccess.Context;
 using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.DataModel.Repository
 {
@@ -36,28 +38,19 @@ namespace BusinessLogic.DataModel.Repository
             _Context.SaveChanges();
         }
 
-        public List<FinalClientDto> GetAll()
+        public List<IDto> GetAll()
         {
-            return (from fc in this._Context.FinalClient.AsNoTracking()
-                    join cli in this._Context.Client on fc.IdClient equals cli.Id
-                    select new FinalClientDto {
-                        IdClient = fc.IdClient,
-                        DocumentNumber = fc.DocumentNumber,
-                        Name = fc.Name,
-                        LastName = fc.LastName,
-                        BillingType = cli.BillingType,
-                        PhoneNumber = cli.PhoneNumber,
-                        Address = cli.Address,
-                        EMail = cli.Email
-                    }).ToList();
+            return this._FinalClientMapper.MapToDto(this._Context.FinalClient.Include("Client").AsNoTracking().ToList());
+        }
+
+        public List<Client> GetAllClient()
+        {
+            return this._Context.Client.Include("FinalClient").AsNoTracking().ToList();
         }
 
         public IDto GetById(int id)
         {
-            Client entity = this._Context.Client.AsNoTracking().FirstOrDefault(x => x.Id == id);
-            entity.FinalClient = this._Context.FinalClient.AsNoTracking().FirstOrDefault(x => x.IdClient == id);
-
-            return this._FinalClientMapper.MapToDto(entity);
+            return this._FinalClientMapper.MapToDto(this._Context.FinalClient.Include("Client").AsNoTracking().FirstOrDefault(x => x.IdClient == id));
         }
 
         public bool AnyFinalClientByDocument(string docNumber)

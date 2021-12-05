@@ -2,6 +2,7 @@
 using BusinessLogic.Logic;
 using CommonSolution.DTOs;
 using CommonSolution.ENUMs;
+using CommonSolution.Interfaces;
 using iText.Kernel.Colors;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Draw;
@@ -85,7 +86,7 @@ namespace ClientApp.Controllers
         public JsonResult GetAll()
         {
             LPackageController lgc = new LPackageController();
-            List<PackageDto> dto = lgc.GetAll();
+            List<IDto> dto = lgc.GetAll();
             return Json(new { data = dto });
         }
 

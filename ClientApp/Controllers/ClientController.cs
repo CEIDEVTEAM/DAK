@@ -24,7 +24,7 @@ namespace ClientApp.Controllers
 
         public ActionResult AddFinalClient(FinalClientDto dto)
         {
-            IController lgc = new LFinalClientController();
+            ICrudController lgc = new LFinalClientController();
 
             LPackageController prueba = new LPackageController();
 
@@ -48,7 +48,7 @@ namespace ClientApp.Controllers
 
         public ActionResult AddCompany(CompanyDto dto)
         {
-            IController lgc = new LCompanyController();
+            IControllerBase lgc = new LCompanyController();
 
             List<string> colErrors = lgc.Add(dto);
 

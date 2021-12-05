@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CommonSolution.DTOs
 {
-    public class PackageTrackingDatailDto: IDto
+    public class TrackingDto : IDto
     {
         public int Id { get; set; }
         public int IdPackage { get; set; }

@@ -24,7 +24,7 @@ namespace ClientApp.Controllers
         {
             var idPackage = HttpContext.Session.GetString("44");
             LPackageController lgc = new LPackageController();
-            PackageDto dto = lgc.GetPackageById(int.Parse(idPackage));
+            PackageDto dto = (PackageDto)lgc.GetById(int.Parse(idPackage));
 
             return View(dto);
         }
@@ -49,7 +49,7 @@ namespace ClientApp.Controllers
         public ActionResult CreatePdf(int id)
         {
             LPackageController lgc = new LPackageController();
-            PackageDto dto = lgc.GetPackageById(id);
+            PackageDto dto = (PackageDto)lgc.GetById(id);
 
             var stream = new MemoryStream();
             var writer = new PdfWriter(stream);

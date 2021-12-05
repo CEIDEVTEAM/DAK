@@ -66,9 +66,9 @@ namespace BusinessLogic.DataModel.Mappers
             };
         }
 
-        public List<PackageDto> MapToDto(List<Package> packages)
+        public List<IDto> MapToDto(List<Package> packages)
         {
-            List<PackageDto> dtos = new List<PackageDto>();
+            List<IDto> dtos = new List<IDto>();
             foreach (Package package in packages)
             {
                 PackageDto dto = this.MapToDto(package);

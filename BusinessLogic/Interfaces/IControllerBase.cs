@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Interfaces
 {
-    public interface IController
+    public interface IControllerBase
     {
         List<string> Add(IDto dto);
-        IDto GetById(int id);
-        
+
     }
 }
