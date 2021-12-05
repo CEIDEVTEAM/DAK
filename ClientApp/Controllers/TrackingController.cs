@@ -15,6 +15,7 @@ namespace ClientApp.Controllers
             return View();
         }
 
+        [HttpPost("GetTrackingRequest", Name = "GetTrackingRequest")]
         public ActionResult GetTrackingRequest(TrackingDto dto)
         {
             LTrackingController lgc = new LTrackingController();
