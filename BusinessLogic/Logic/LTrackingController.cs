@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DataModel;
+using BusinessLogic.Domain;
 using CommonSolution.Constants;
 using CommonSolution.DTOs;
 using Newtonsoft.Json;
@@ -27,7 +28,7 @@ namespace BusinessLogic.Logic
                     PackageDto packageDto = uow.PackageRepository.GetByTrackingNuber(dto.trackingNumber);
                     if (packageDto.StatusCode != CPackageStatusCode.DELIVERED)
                     {
-                        PackageTrackingDatailDto tdto = this.HandleRequest(dto);
+                        PackageTrackingDatailDto tdto = TrackingService.HandleRequest(dto);
                         tdto.IdPackage = packageDto.Id;
                         uow.PackageTrackingDatailRespository.Add(tdto);
                         uow.SaveChanges();
@@ -43,30 +44,6 @@ namespace BusinessLogic.Logic
             }
 
             return list;
-        }
-
-
-
-
-
-
-        public PackageTrackingDatailDto HandleRequest(TrackingDto dto)
-        {
-            var url = $"http://localhost:40378/api/Tracking/ProcessRequest/{dto.trackingNumber}";
-
-            var request = WebRequest.Create(url);
-            request.Method = "GET";
-
-            using var webResponse = request.GetResponse();
-            using var webStream = webResponse.GetResponseStream();
-
-            using var reader = new StreamReader(webStream);
-            var data = reader.ReadToEnd();
-
-            PackageTrackingDatailDto currDto = new PackageTrackingDatailDto();
-            var resultObject = (PackageTrackingDatailDto)JsonConvert.DeserializeObject(data, currDto.GetType());
-
-            return resultObject;
         }
 
     }

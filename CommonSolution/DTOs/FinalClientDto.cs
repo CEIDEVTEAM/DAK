@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,7 @@ namespace CommonSolution.DTOs
     {
         public int IdClient { get; set; }
 
+        [Remote(action: "ExistClientDocNumber", controller: "Client", ErrorMessage = "El documento ya está ingresado")]
         [StringLength(15, ErrorMessage = "El documento no puede superar los 15 caracteres")]
         [Required(ErrorMessage = "El documento es requerido")]
         [DisplayName("Documento")]

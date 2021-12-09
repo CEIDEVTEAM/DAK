@@ -79,7 +79,22 @@ namespace ClientApp.Controllers
             return ClientTypeList;
         }
 
-        
+        #endregion
+
+        #region VALIDATIONS
+        public JsonResult ExistClientDocNumber(string IdClient)
+        {
+            bool response = false;
+            LFinalClientController lgc = new LFinalClientController();
+
+            response = lgc.ExistClientByDocNumber(IdClient);
+            if (response)
+                return Json(data: true);
+            else
+                return Json(data: false);
+        }
+
+
         #endregion
     }
 }

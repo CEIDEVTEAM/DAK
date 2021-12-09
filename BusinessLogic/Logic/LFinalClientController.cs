@@ -44,6 +44,14 @@ namespace BusinessLogic.Logic
             throw new System.NotImplementedException();
         }
 
+        public bool ExistClientByDocNumber(string document)
+        {
+            using(var uow = new UnitOfWork())
+            {
+                return uow.FinalClientRepository.AnyFinalClientByDocument(document);
+            }
+        }
+
         //
         //VER SI VAMOS A VALIDAR MSIMO EN EL CONTROLLER O EN OTRA CLASE
         //QUE VALIDACIONES VAMOS A TENER ?? SOLO DE TIPOS DE DATO?
