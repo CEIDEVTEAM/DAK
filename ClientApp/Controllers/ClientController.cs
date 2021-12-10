@@ -87,14 +87,24 @@ namespace ClientApp.Controllers
             bool response = false;
             LFinalClientController lgc = new LFinalClientController();
 
-            response = lgc.ExistClientByDocNumber(IdClient);
+            response = !lgc.ExistClientByDocNumber(IdClient);
             if (response)
                 return Json(data: true);
             else
                 return Json(data: false);
         }
 
+        public JsonResult ExistClientRUT(string RUT)
+        {
+            bool response = false;
+            LCompanyController lgc = new LCompanyController();
 
+            response = !lgc.ExistClientByRUT(RUT);
+            if (response)
+                return Json(data: true);
+            else
+                return Json(data: false);
+        }
         #endregion
     }
 }

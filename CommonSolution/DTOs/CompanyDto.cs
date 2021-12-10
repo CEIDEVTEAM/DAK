@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,7 @@ namespace CommonSolution.DTOs
     {
         public int IdClient { get; set; }
 
+        [Remote(action: "ExistClientRUT", controller: "Client", ErrorMessage = "El RUT ya está ingresado")]
         [StringLength(20, ErrorMessage = "El RUT no puede superar los 20 caracteres")]
         [Required(ErrorMessage = "El RUT es requerido")]
         [DisplayName("RUT")]

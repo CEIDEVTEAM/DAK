@@ -48,6 +48,7 @@ namespace BusinessLogic.DataModel.Repository
             }
         }
 
+
         public bool AnyCompanyByRut(string rutNumber)
         {
             return _Context.Company.Any(x => x.Rut == rutNumber);

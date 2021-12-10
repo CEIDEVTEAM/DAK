@@ -27,5 +27,13 @@ namespace BusinessLogic.Logic
         {
             throw new NotImplementedException();  
         }
+
+        public bool ExistClientByRUT(string rut)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                return uow.CompanyRepository.AnyCompanyByRut(rut);
+            }
+        }
     }
 }
