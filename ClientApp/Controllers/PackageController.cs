@@ -90,7 +90,7 @@ namespace ClientApp.Controllers
             return Json(new { data = dto });
         }
 
-        
+
 
 
         public JsonResult ValidateRemitent(string IdClient)
@@ -116,5 +116,19 @@ namespace ClientApp.Controllers
             else
                 return Json(data: false);
         }
+    }
+}
+
+namespace ClientApp
+{
+    public class MessageVM
+    {
+        public MessageVM()
+        {
+        }
+
+        public string CssClassName { get; set; }
+        public string Title { get; set; }
+        public string Message { get; set; }
     }
 }

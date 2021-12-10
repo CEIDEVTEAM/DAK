@@ -24,10 +24,13 @@
             <div class="col-md-4">
                 <form>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                    @if (TempData["msg"] != null)
+                    {
+                    @Html.Raw(TempData["msg"])
+                    }
                     <div class="form-group">
                         <label asp-for="IdClient" class="control-label"></label>
-                        <input asp-for="IdClient" class="form-control" required/>
+                        <input asp-for="IdClient" class="form-control" required />
                         <span asp-validation-for="IdClient" class="text-danger"></span>
 
                     </div>
@@ -83,11 +86,11 @@
                     <hr />
                     <div class="form-group">
                         <input type="button" value="Procesar" onclick="addPackage()" class="btn btn-primary" id="smBut" />
-                        
+
                     </div>
                 </form>
             </div>
-           
+
         </div>
     </div>
 </div>

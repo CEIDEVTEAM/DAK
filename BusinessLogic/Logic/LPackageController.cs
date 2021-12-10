@@ -77,13 +77,14 @@ namespace BusinessLogic.Logic
             return errors;
         }
 
-        public void CreateTrackingNumber(PackageDto dto)
+        public string CreateTrackingNumber(PackageDto dto)
         {
             PackageDto currDto = (PackageDto)this.GetById(dto.Id);
 
             TrackingNumberGenerator tng = new TrackingNumberGenerator(currDto);
             currDto.TrackingNumber = tng.GenerateTrackingNumber();
             this.Update(currDto);
+            return currDto.TrackingNumber;
         }
 
         private void CalculatePrice(PackageDto dto)

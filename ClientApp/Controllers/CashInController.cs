@@ -33,15 +33,18 @@ namespace ClientApp.Controllers
         {
             LCashInController lcc = new LCashInController();
             lcc.PaymentCashProcess(dto);
-            this.CreateTrackingNumber(dto);
+            string trakNum = this.CreateTrackingNumber(dto);
+            TempData["msg"] = $"<script>alert('Pago procesado: Numero de Trackeo: {trakNum}');</script>";
             return RedirectToAction("New", "Package");
+            
         }
-        
 
-        public void CreateTrackingNumber(PackageDto dto)
+
+        public string CreateTrackingNumber(PackageDto dto)
         {
             LPackageController lgc = new LPackageController();
-            lgc.CreateTrackingNumber(dto);
+            string trakNum = lgc.CreateTrackingNumber(dto);
+            return trakNum;
         }
 
 
