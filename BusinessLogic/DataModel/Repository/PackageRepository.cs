@@ -15,18 +15,18 @@ namespace BusinessLogic.DataModel.Repository
 {
     public class PackageRepository
     {
-        
+
         private PackageMapper _PackageMapper;
         private readonly DAKContext _Context;
         public PackageRepository(DAKContext context)
         {
-            
+
             this._PackageMapper = new PackageMapper();
             this._Context = context;
         }
 
         public void Add(PackageDto dto)
-        {           
+        {
             Package packageEntity = this._PackageMapper.MapToEntity(dto);
             _Context.Package.Add(packageEntity);
             _Context.SaveChanges();
@@ -35,7 +35,8 @@ namespace BusinessLogic.DataModel.Repository
 
         public List<IDto> GetAll()
         {
-            return this._PackageMapper.MapToDto(this._Context.Package.AsNoTracking().Where(x=>x.StatusCode!=CPackageStatusCode.DELIVERED).ToList());
+            return this._PackageMapper.MapToDto(this._Context.Package.AsNoTracking().
+                Where(x => x.StatusCode != CPackageStatusCode.DELIVERED).OrderByDescending(x => x.Id).ToList());
         }
 
         public void Update(PackageDto dto)

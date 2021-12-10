@@ -1,0 +1,100 @@
+﻿@model IEnumerable<CommonSolution.DTOs.PackageDto>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Recepción de paquete</h1>
+                    <hr />
+                    <h4 class="m-0 text-dark">Listado de Paquetes</h4>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content" style="margin-left:25px">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdExpedition)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StatusCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TrackingNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Distance)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Price)
+                            </th>
+
+
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdExpedition)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StatusCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TrackingNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Distance)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

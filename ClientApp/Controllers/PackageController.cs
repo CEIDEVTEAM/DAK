@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.DataModel;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Logic;
 using CommonSolution.DTOs;
 using CommonSolution.ENUMs;
@@ -90,9 +91,19 @@ namespace ClientApp.Controllers
             return Json(new { data = dto });
         }
 
-
-
-
+        public ActionResult List()
+        {
+            LPackageController lgc = new LPackageController();
+            List<IDto> dto = new List<IDto>();
+            List<PackageDto> pdto = new List<PackageDto>();
+            using (var uow = new UnitOfWork())
+            {
+                dto = uow.PackageRepository.GetAll();
+                pdto = dto.Cast<PackageDto>().ToList();
+            }
+            
+            return View(pdto);
+        }
         public JsonResult ValidateRemitent(string IdClient)
         {
             bool response = false;
@@ -119,16 +130,3 @@ namespace ClientApp.Controllers
     }
 }
 
-namespace ClientApp
-{
-    public class MessageVM
-    {
-        public MessageVM()
-        {
-        }
-
-        public string CssClassName { get; set; }
-        public string Title { get; set; }
-        public string Message { get; set; }
-    }
-}
