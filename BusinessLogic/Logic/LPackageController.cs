@@ -76,6 +76,32 @@ namespace BusinessLogic.Logic
             }
             return errors;
         }
+        public List<string> UpdateTrakingNumber(IDto iDto)
+        {
+            PackageDto dto = (PackageDto)iDto;
+            List<string> errors = new List<string>();
+
+            if (errors.Count == 0)
+            {
+                using (var uow = new UnitOfWork())
+                {
+                    uow.BeginTransaction();
+                    try
+                    {
+                        uow.PackageRepository.Update(dto);
+                        uow.SaveChanges();
+                        uow.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        errors.Add("Error al comunicarse con la base de datos");
+                        uow.Rollback();
+                    }
+                }
+            }
+            return errors;
+        }
+
 
         public string CreateTrackingNumber(PackageDto dto)
         {
@@ -83,7 +109,7 @@ namespace BusinessLogic.Logic
 
             TrackingNumberGenerator tng = new TrackingNumberGenerator(currDto);
             currDto.TrackingNumber = tng.GenerateTrackingNumber();
-            this.Update(currDto);
+            this.UpdateTrakingNumber(currDto);
             return currDto.TrackingNumber;
         }
 

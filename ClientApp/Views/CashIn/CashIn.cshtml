@@ -16,7 +16,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="content" style="margin-left:25px">
-       
+
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Efectivo</a>
@@ -33,107 +33,35 @@
 
         </ul>
 
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="col-3">
-                        <br />
-                        <h4 class="m-0 text-dark">Efectivo</h4>
-                        <hr />
-                        <form asp-action="ProcessPayment">
-                            <input type="hidden" asp-for="PaymentMethod" value="Cash" />
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label class="control-label">Procesamiento del Paquete nro:</label>
-                                <input asp-for="Id" class="form-control" readonly />
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="col-3">
+                    <br />
+                    <h4 class="m-0 text-dark">Efectivo</h4>
+                    <hr />
+                    <form asp-action="ProcessPayment" asp-controller="CashIn" method="post" enctype="multipart/form-data" id="cashform">
+                        <input type="hidden" asp-for="PaymentMethod" value="Cash" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Procesamiento del Paquete nro:</label>
+                            <input asp-for="Id" class="form-control" readonly />
 
-                            </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="control-label">Total a cobrar</label>
-                                <input asp-for="Price" class="form-control" readonly />
+                        <div class="form-group">
+                            <label class="control-label">Total a cobrar</label>
+                            <input asp-for="Price" class="form-control" readonly />
 
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Cobrar" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cobrar" class="btn btn-primary" />
+                        </div>
+                    </form>
                 </div>
-                <div class="tab-pane fade" id="menu1" role="tabpanel" aria-labelledby="menu1-tab">
-                    <div class="col-3">
-                        <br />
-                        <h4 class="m-0 text-dark">Crédito</h4>
-                        <hr />
-                        <form asp-action="ProcessPayment">
-                            <input type="hidden" asp-for="PaymentMethod" value="Credit" />
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label class="control-label">Procesamiento del Paquete nro:</label>
-                                <input asp-for="Id" class="form-control" readonly />
 
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Total a cobrar</label>
-                                <input asp-for="Price" class="form-control" readonly />
-
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Cobrar" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="menu2" role="tabpanel" aria-labelledby="menu2-tab">
-                    <div class="col-3">
-                        <br />
-                        <h4 class="m-0 text-dark">Débito</h4>
-                        <hr />
-                        <form asp-action="ProcessPayment">
-                            <input type="hidden" asp-for="PaymentMethod" value="Debit" />
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label class="control-label">Procesamiento del Paquete nro:</label>
-                                <input asp-for="Id" class="form-control" readonly />
-
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Total a cobrar</label>
-                                <input asp-for="Price" class="form-control" readonly />
-
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Cobrar" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="menu3" role="tabpanel" aria-labelledby="menu3-tab">
-                    <div class="col-3">
-                        <br />
-                        <h4 class="m-0 text-dark">Mercado Pago</h4>
-                        <hr />
-                        <form asp-action="ProcessPayment">
-                            <input type="hidden" asp-for="PaymentMethod" value="MercadoPago" />
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label class="control-label">Procesamiento del Paquete nro:</label>
-                                <input asp-for="Id" class="form-control" readonly />
-
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Total a cobrar</label>
-                                <input asp-for="Price" class="form-control" readonly />
-
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Cobrar" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
-</div>
+        </div>
+    </div>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

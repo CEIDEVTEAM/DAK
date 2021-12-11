@@ -29,6 +29,7 @@ namespace ClientApp.Controllers
             return View(dto);
         }
 
+        [HttpPost]
         public ActionResult ProcessPayment(PackageDto dto)
         {
             LCashInController lcc = new LCashInController();
